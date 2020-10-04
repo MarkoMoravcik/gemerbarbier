@@ -48,7 +48,7 @@ import { Component, Vue } from "vue-property-decorator";
 export default class BarberPage extends Vue {
   private selectBarber(barberName: string) {
     this.$store.commit("setBarberMenu", barberName);
-    this.$router.push({ name: "admin" });
+    this.$router.push({ name: "admin/calendar" });
   }
 }
 </script>

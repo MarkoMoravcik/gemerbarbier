@@ -82,7 +82,7 @@
                 ></v-date-picker>
 
                 <v-btn-toggle
-                  v-model="reservationTime"
+                  v-model="elementNumber"
                   mandatory
                   group
                   class="mt-4 ml-1 mr-1"
@@ -95,7 +95,10 @@
                         :id="item.id"
                         rounded
                         text
-                        @click="reservationTime = item"
+                        @click="
+                          reservationTime = item;
+                          elementNumber = item;
+                        "
                         >{{ item }}</v-btn
                       >
                     </v-div>
@@ -221,7 +224,6 @@ declare let require: any;
 export default class Reservation extends Vue {
   cutType!: string;
   cutTag!: string;
-  cutTime!: string;
   barber!: string;
   barbers!: Array<any>;
   reservationDate!: string;
@@ -237,6 +239,7 @@ export default class Reservation extends Vue {
   okStep3!: boolean;
   dialogState!: boolean;
   valid!: boolean;
+  elementNumber!: string;
 
   private createReservation(): void {
     this.reservation = {
@@ -325,17 +328,16 @@ export default class Reservation extends Vue {
       });
   }
 
-  private setCutType(cutType: string, cutTag: string, cutTime: string): void {
+  private setCutType(cutType: string, cutTag: string): void {
     this.cutType = cutType;
     this.cutTag = cutTag;
-    this.cutTime = cutTime;
     this.okStep2 = false;
     this.$vuetify.goTo(document.body.scrollHeight);
   }
 
   @Watch("reservationDate")
   private getAvailableTimes(): void {
-    if(this.reservationDate != ""){
+    if (this.reservationDate != "") {
       axios
         .get(
           process.env.VUE_APP_GEMERBARBIER_API +
@@ -343,8 +345,8 @@ export default class Reservation extends Vue {
             this.reservationDate +
             "&barber=" +
             this.barber +
-            "&cutTime=" +
-            this.cutTime
+            "&cutTag=" +
+            this.cutTag
         )
         .then(response => {
           this.availableTimes = response.data;
@@ -364,6 +366,7 @@ export default class Reservation extends Vue {
   private goStep3() {
     this.availableTimes = [];
     this.reservationDate = "";
+    this.elementNumber = "";
     this.okStep3 = true;
   }
 }

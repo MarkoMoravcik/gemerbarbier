@@ -48,7 +48,7 @@ import { Component, Vue } from "vue-property-decorator";
           index: 1,
           name: "Úprava brady",
           tag: "BEARD",
-          price: "4",
+          price: "5",
           time: "20",
           icon: "$vuetify.icons.beardCut",
           color: "black"
@@ -114,8 +114,7 @@ export default class CutsRadioGroup extends Vue {
     this.cuts[index - 1]["color"] = "#1976d2";
     const cutType = this.cuts[index - 1]["name"];
     const cutTag = this.cuts[index - 1]["tag"];
-    const cutTime = this.cuts[index - 1]["time"];
-    this.$emit("getCutType", cutType, cutTag, cutTime);
+    this.$emit("getCutType", cutType, cutTag);
   }
 }
 </script>
