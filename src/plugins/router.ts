@@ -1,5 +1,6 @@
 import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
+import VueRouter from "vue-router";
+import { RouteConfig } from "vue-router";
 import HomePage from "../pages/HomePage.vue";
 import ReservationPage from "../pages/ReservationPage.vue";
 import LoginPage from "../pages/LoginPage.vue";
@@ -10,6 +11,7 @@ import store from "./store";
 
 Vue.use(VueRouter);
 
+// eslint-disable-next-line no-use-before-define
 const routes = <Array<RouteConfig>>[
   {
     path: "/",
@@ -36,7 +38,11 @@ const routes = <Array<RouteConfig>>[
     components: {
       default: BarberPage
     },
-    beforeEnter: (to: any, from: any, next: (arg0: boolean | undefined) => void) => {
+    beforeEnter: (
+      to: any,
+      from: any,
+      next: (arg0: boolean | undefined) => void
+    ) => {
       if (store.state.authenticated == false) {
         next(false);
       } else {
@@ -50,7 +56,11 @@ const routes = <Array<RouteConfig>>[
     components: {
       default: AdminCalendarPage
     },
-    beforeEnter: (to: any, from: any, next: (arg0: boolean | undefined) => void) => {
+    beforeEnter: (
+      to: any,
+      from: any,
+      next: (arg0: boolean | undefined) => void
+    ) => {
       if (store.state.authenticated == false) {
         next(false);
       } else {
@@ -64,7 +74,11 @@ const routes = <Array<RouteConfig>>[
     components: {
       default: AdminSchedulePage
     },
-    beforeEnter: (to: any, from: any, next: (arg0: boolean | undefined) => void) => {
+    beforeEnter: (
+      to: any,
+      from: any,
+      next: (arg0: boolean | undefined) => void
+    ) => {
       if (store.state.authenticated == false) {
         next(false);
       } else {
