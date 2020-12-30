@@ -18,7 +18,15 @@
           <v-container justify-center fluid fill-height class="align-end">
             <v-row class="justify-center buttonsPanel">
               <v-btn
-                large
+              v-bind="buttonSize" 
+v-if="$vuetify.breakpoint.xs"
+                color="main1"
+                @click="jumptToReservation()"
+                ><b>Rezervácia</b>
+              </v-btn>
+                            <v-btn
+              v-bind="buttonSize" 
+                v-if="$vuetify.breakpoint.smAndUp"
                 color="main1"
                 @click="jumptToReservation()"
                 class="mrb-60"
@@ -30,7 +38,7 @@
       </section>
       <section id="price">
         <v-img
-         :aspect-ratio="16/9"
+         
           :src="priceListImage"
           style="position: relative"
         >
@@ -117,6 +125,11 @@ export default class HomePage extends Vue {
   private jumptToReservation() {
     const routeData = this.$router.resolve({ name: "reservation" });
     window.open(routeData.href, "_blank");
+  }
+
+    private get buttonSize() {
+    const size = { xs: "small", sm: "medium", lg: "large" }[this.$vuetify.breakpoint.name];
+    return size ? { [size]: true } : {};
   }
 
   get width () {
