@@ -11,21 +11,22 @@
     </v-app-bar>
     <v-content>
       <section id="startPage">
-        <v-img :aspect-ratio="16/9"
+        <v-img
+          :aspect-ratio="16 / 9"
           :src="homeImage"
           style="position: relative"
         >
           <v-container justify-center fluid fill-height class="align-end">
             <v-row class="justify-center buttonsPanel">
               <v-btn
-              v-bind="buttonSize" 
-v-if="$vuetify.breakpoint.xs"
+                v-bind="buttonSize"
+                v-if="$vuetify.breakpoint.xs"
                 color="main1"
                 @click="jumptToReservation()"
                 ><b>Rezervácia</b>
               </v-btn>
-                            <v-btn
-              v-bind="buttonSize" 
+              <v-btn
+                v-bind="buttonSize"
                 v-if="$vuetify.breakpoint.smAndUp"
                 color="main1"
                 @click="jumptToReservation()"
@@ -37,13 +38,9 @@ v-if="$vuetify.breakpoint.xs"
         </v-img>
       </section>
       <section id="price">
-        <v-img
-         
-          :src="priceListImage"
-          style="position: relative"
-        >
-                <div class="py-12"></div>
-        <!--<v-container class="text-center">
+        <v-img :src="priceListImage" style="position: relative">
+          <div class="py-12"></div>
+          <!--<v-container class="text-center">
           <h2 class="display-1 font-weight-bold mb-3" style="color:white">Služby/Cenník</h2>
         </v-container>-->
         </v-img>
@@ -77,7 +74,7 @@ v-if="$vuetify.breakpoint.xs"
         <div class="py-12"></div>
 
         <v-container class="text-center" fluid>
-         <!-- <h2 class="display-1 font-weight-bold mb-3">Kontakt</h2>-->
+          <!-- <h2 class="display-1 font-weight-bold mb-3">Kontakt</h2>-->
           <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="16">
             <GmapMarker
               v-for="(item, index) in markers"
@@ -127,22 +124,29 @@ export default class HomePage extends Vue {
     window.open(routeData.href, "_blank");
   }
 
-    private get buttonSize() {
-    const size = { xs: "small", sm: "medium", lg: "large" }[this.$vuetify.breakpoint.name];
+  private get buttonSize() {
+    const size = { xs: "small", sm: "medium", lg: "large" }[
+      this.$vuetify.breakpoint.name
+    ];
     return size ? { [size]: true } : {};
   }
 
-  get width () {
+  get width() {
     alert(this.$vuetify.breakpoint.name);
-        switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return '200px'
-          case 'sm': return '400px'
-          case 'md': return '600px'
-          case 'lg': return '1920px'
-          case 'xl': return '1000px'
-        }
-        return null;
-      }
+    switch (this.$vuetify.breakpoint.name) {
+      case "xs":
+        return "200px";
+      case "sm":
+        return "400px";
+      case "md":
+        return "600px";
+      case "lg":
+        return "1920px";
+      case "xl":
+        return "1000px";
+    }
+    return null;
+  }
 }
 </script>
 

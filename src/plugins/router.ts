@@ -1,16 +1,16 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import VueRouter, { RouteConfig } from "vue-router";
 import HomePage from "../pages/HomePage.vue";
 import ReservationPage from "../pages/ReservationPage.vue";
 import LoginPage from "../pages/LoginPage.vue";
 import BarberPage from "../pages/BarberPage.vue";
 import AdminCalendarPage from "../pages/AdminCalendarPage.vue";
 import AdminSchedulePage from "../pages/AdminSchedulePage.vue";
-//import store from "./store";
+import store from "./store";
 
 Vue.use(VueRouter);
 
-const routes = [
+const routes = <Array<RouteConfig>>[
   {
     path: "/",
     name: "home",
@@ -35,6 +35,13 @@ const routes = [
     name: "selectBarber",
     components: {
       default: BarberPage
+    },
+    beforeEnter: (to: any, from: any, next: (arg0: boolean | undefined) => void) => {
+      if (store.state.authenticated == false) {
+        next(false);
+      } else {
+        next(true);
+      }
     }
   },
   {
@@ -42,6 +49,13 @@ const routes = [
     name: "calendar",
     components: {
       default: AdminCalendarPage
+    },
+    beforeEnter: (to: any, from: any, next: (arg0: boolean | undefined) => void) => {
+      if (store.state.authenticated == false) {
+        next(false);
+      } else {
+        next(true);
+      }
     }
   },
   {
@@ -49,14 +63,14 @@ const routes = [
     name: "schedule",
     components: {
       default: AdminSchedulePage
+    },
+    beforeEnter: (to: any, from: any, next: (arg0: boolean | undefined) => void) => {
+      if (store.state.authenticated == false) {
+        next(false);
+      } else {
+        next(true);
+      }
     }
-    // beforeEnter: (to: any, from: any, next: (arg0: boolean | undefined) => void) => {
-    //   if (store.state.authenticated == false) {
-    //     next(false);
-    //   } else {
-    //     next(true);
-    //   }
-    // }
   }
 ];
 
