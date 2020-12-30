@@ -11,9 +11,7 @@
     </v-app-bar>
     <v-content>
       <section id="startPage">
-        <v-img
-          :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
-          :max-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
+        <v-img :aspect-ratio="16/9"
           :src="homeImage"
           style="position: relative"
         >
@@ -31,11 +29,16 @@
         </v-img>
       </section>
       <section id="price">
-        <div class="py-12"></div>
-
-        <v-container class="text-center">
-          <h2 class="display-1 font-weight-bold mb-3">Služby/Cenník</h2>
-        </v-container>
+        <v-img
+         :aspect-ratio="16/9"
+          :src="priceListImage"
+          style="position: relative"
+        >
+                <div class="py-12"></div>
+        <!--<v-container class="text-center">
+          <h2 class="display-1 font-weight-bold mb-3" style="color:white">Služby/Cenník</h2>
+        </v-container>-->
+        </v-img>
       </section>
 
       <section id="about-us">
@@ -66,7 +69,7 @@
         <div class="py-12"></div>
 
         <v-container class="text-center" fluid>
-          <h2 class="display-1 font-weight-bold mb-3">Kontakt</h2>
+         <!-- <h2 class="display-1 font-weight-bold mb-3">Kontakt</h2>-->
           <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="16">
             <GmapMarker
               v-for="(item, index) in markers"
@@ -90,7 +93,11 @@ declare let require: any;
   props: {
     homeImage: {
       type: String,
-      default: require("@/assets/images/home_background.jpg")
+      default: require("@/assets/images/gemerbarbier_homeBackground.jpg")
+    },
+    priceListImage: {
+      type: String,
+      default: require("@/assets/images/gemerbarbier_priceList.jpg")
     },
     center: {
       type: Object,
@@ -111,6 +118,18 @@ export default class HomePage extends Vue {
     const routeData = this.$router.resolve({ name: "reservation" });
     window.open(routeData.href, "_blank");
   }
+
+  get width () {
+    alert(this.$vuetify.breakpoint.name);
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return '200px'
+          case 'sm': return '400px'
+          case 'md': return '600px'
+          case 'lg': return '1920px'
+          case 'xl': return '1000px'
+        }
+        return null;
+      }
 }
 </script>
 
@@ -120,8 +139,8 @@ export default class HomePage extends Vue {
   background: linear-gradient(
     45deg,
     rgba(30, 40, 59, 1) 0%,
-    rgba(30, 40, 59, 1) 55%,
-    rgba(168, 13, 9, 1) 100%
+    rgba(30, 40, 59, 1) 45%,
+    rgba(96, 16, 19, 1) 100%
   );
 }
 

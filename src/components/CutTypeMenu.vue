@@ -49,7 +49,7 @@ import { Component, Vue } from "vue-property-decorator";
           name: "Úprava brady",
           tag: "BEARD",
           price: "5",
-          time: "20",
+          time: "15",
           icon: "$vuetify.icons.beardCut",
           color: "black"
         },
@@ -58,7 +58,7 @@ import { Component, Vue } from "vue-property-decorator";
           name: "Základný strih",
           tag: "BASIC_CUT",
           price: "8",
-          time: "40",
+          time: "30",
           icon: "$vuetify.icons.classicCut",
           color: "black"
         },
@@ -67,7 +67,7 @@ import { Component, Vue } from "vue-property-decorator";
           name: "Základný strih + úprava brady",
           tag: "BASIC_BEARD",
           price: "12",
-          time: "60",
+          time: "45",
           icon: "$vuetify.icons.classicCut",
           icon2: "$vuetify.icons.beardCut",
           color: "black"
@@ -77,7 +77,7 @@ import { Component, Vue } from "vue-property-decorator";
           name: "Exclusive strih",
           tag: "EXCLUSIVE_CUT",
           price: "14",
-          time: "60",
+          time: "45",
           icon: "$vuetify.icons.exclusiveCut",
           color: "black"
         }

@@ -2,24 +2,45 @@
   <v-app>
     <AdminMenu />
     <v-col>
+      <v-layout justify-end align-end>
+        <div v-if="$vuetify.breakpoint.xs" class="body-2">
+          {{ title }}
+        </div>
+        <v-spacer />
+        <v-btn v-bind="buttonSize" color="success" @click="dialog = true"
+          >Pridaj rezerváciu</v-btn
+        >
+      </v-layout>
+      <AdminReservationDialog
+        v-model="dialog"
+        @mapReservation="mapReservation"
+      />
+
       <v-sheet height="64">
         <v-toolbar flat color="white">
-          <v-btn outlined class="mr-4" @click="setToday">
+          <v-btn
+            v-bind="buttonSize"
+            color="primary"
+            class="mr-4"
+            @click="setToday"
+          >
             Today
           </v-btn>
-          <v-btn fab text small @click="prev">
-            <v-icon small>mdi-chevron-left</v-icon>
+          <v-btn v-bind="buttonSize" icon small @click="prev">
+            <v-icon v-bind="buttonSize" small>mdi-chevron-left</v-icon>
           </v-btn>
-          <v-btn fab text small @click="next">
-            <v-icon small>mdi-chevron-right</v-icon>
+          <v-btn v-bind="buttonSize" small icon @click="next">
+            <v-icon v-bind="buttonSize" small>mdi-chevron-right</v-icon>
           </v-btn>
-          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-toolbar-title v-if="$vuetify.breakpoint.smAndUp">{{
+            title
+          }}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-menu bottom right>
             <template v-slot:activator="{ on }">
-              <v-btn outlined v-on="on">
+              <v-btn v-bind="buttonSize" outlined v-on="on">
                 <span>{{ typeToLabel[type] }}</span>
-                <v-icon right>mdi-menu-down</v-icon>
+                <v-icon v-bind="buttonSize" right>mdi-menu-down</v-icon>
               </v-btn>
             </template>
             <v-list>
@@ -33,7 +54,7 @@
                 <v-list-item-title>Month</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 days</v-list-item-title>
+                <v-list-item-title>4 Days</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -43,6 +64,7 @@
       <v-sheet height="500">
         <v-calendar
           ref="calendar"
+          locale="en"
           v-model="focus"
           color="primary"
           :events="events"
@@ -53,17 +75,26 @@
           @click:more="viewDay"
           @click:date="viewDay"
           @change="updateRange"
-        ></v-calendar>
+        >
+        </v-calendar>
+
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"
           offset-x
         >
-          <v-card color="grey lighten-4" min-width="350px" flat>
+          <v-card color="grey lighten-4" min-width="220px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-toolbar-title v-html="selectedEvent.cutType"></v-toolbar-title>
               <v-spacer></v-spacer>
+              <v-btn
+                v-bind="buttonSize"
+                icon
+                @click="deleteReservation(selectedEvent.id)"
+              >
+                <v-icon v-bind="buttonSize">mdi-delete</v-icon>
+              </v-btn>
             </v-toolbar>
             <v-card-text>
               <span
@@ -95,10 +126,11 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import AdminMenu from "@/components/AdminMenu.vue";
+import AdminReservationDialog from "@/components/AdminReservationDialog.vue";
 import axios from "axios";
 
 @Component({
-  components: { AdminMenu },
+  components: { AdminMenu, AdminReservationDialog },
   props: {
     today: {
       type: String,
@@ -114,14 +146,25 @@ import axios from "axios";
     },
     typeToLabel: {
       type: Object,
-      default: {
+      default: () => ({
         month: "Month",
         week: "Week",
         day: "Day",
         "4day": "4 Days"
-      }
+      })
     },
-    events: Array
+    valid: {
+      type: Boolean,
+      default: false
+    },
+    dialog: {
+      type: Boolean,
+      default: false
+    },
+    events: {
+      type: Array,
+      default: () => []
+    }
   }
 })
 export default class AdminCalendarPage extends Vue {
@@ -134,7 +177,7 @@ export default class AdminCalendarPage extends Vue {
   private selectedEvent: any = {};
   private selectedElement: any = null;
   private selectedOpen = false;
-  private events!: any;
+  private events!: Array<any>;
 
   private get calendarInstance(): Vue & {
     prev: () => void;
@@ -154,7 +197,6 @@ export default class AdminCalendarPage extends Vue {
       month: "long"
     });
   }
-
   private prev(): void {
     this.calendarInstance.prev();
   }
@@ -179,7 +221,6 @@ export default class AdminCalendarPage extends Vue {
 
     const startDay: string = start.day + this.nth(start.day);
     const endDay: string = end.day + this.nth(end.day);
-
     switch (this.type) {
       case "month":
         return `${startMonth} ${startYear}`;
@@ -187,6 +228,8 @@ export default class AdminCalendarPage extends Vue {
         return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
       case "day":
         return `${startMonth} ${startDay} ${startYear}`;
+      case "4day":
+        return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
     }
     return "";
   }
@@ -228,7 +271,12 @@ export default class AdminCalendarPage extends Vue {
     this.end = end;
   }
 
-  private async mounted() {
+  private get buttonSize() {
+    const size = { xs: "small", sm: "medium" }[this.$vuetify.breakpoint.name];
+    return size ? { [size]: true } : {};
+  }
+
+  mounted() {
     this.mapReservation();
   }
 
@@ -249,6 +297,19 @@ export default class AdminCalendarPage extends Vue {
           this.events.push(dateObject);
         });
       });
+  }
+
+  private async deleteReservation(id: number) {
+    await axios.delete(
+      process.env.VUE_APP_GEMERBARBIER_API +
+        "/deleteReservation?id=" +
+        id +
+        "&barber=" +
+        this.$store.getters.actualBarber
+    );
+
+    this.mapReservation();
+    this.selectedOpen = false;
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-div>
+  <div>
     <v-toolbar dark color="primary">
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
@@ -49,10 +49,10 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-  </v-div>
+  </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   components: {},
@@ -63,7 +63,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
     },
     items: {
       type: Array,
-      default: [
+      default: () => [
         {
           text: "Termíny",
           icon: "mdi-clock",
@@ -91,16 +91,7 @@ export default class AdminMenu extends Vue {
   itemMenu!: number;
 
   private getBarberImage() {
-    if (this.$store.getters.actualBarber == "Vilo") {
-      return require("@/assets/images/vilo.jpg");
-    } else {
-      return require("@/assets/images/emptyAvatar.png");
-    }
-  }
-
-  @Watch("itemMenu")
-  private goCalendar(): void {
-    this.$emit("calendarVis", this.itemMenu == 1);
+    return this.$store.getters.barberPhoto(this.$store.getters.actualBarber);
   }
 }
 </script>

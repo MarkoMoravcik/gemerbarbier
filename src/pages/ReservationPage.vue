@@ -140,7 +140,8 @@
                 >
                   Rezervovať
                 </v-btn>
-                <ReservationDialogDone :dialog="dialogState" />
+                <ReservationDoneDialog v-model="dialog" />
+                <ReservationFailDialog v-model="failDialog" />
               </v-col>
             </v-stepper-content>
           </v-stepper-items>
@@ -152,14 +153,20 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import CutTypeMenu from "@/components/CutTypeMenu.vue";
-import ReservationDialogDone from "@/components/ReservationDoneDialog.vue";
+import ReservationDoneDialog from "@/components/ReservationDoneDialog.vue";
 import ReservationForm from "@/components/ReservationForm.vue";
+import ReservationFailDialog from "@/components/ReservationFailDialog.vue";
 import axios from "axios";
 import emailjs from "emailjs-com";
 declare let require: any;
 
 @Component({
-  components: { CutTypeMenu, ReservationDialogDone, ReservationForm },
+  components: {
+    CutTypeMenu,
+    ReservationDoneDialog,
+    ReservationFailDialog,
+    ReservationForm
+  },
   props: {
     availableTimes: Array,
     e1: {
@@ -168,36 +175,9 @@ declare let require: any;
     },
     reservationDate: String,
     reservationTime: String,
-    datesData: {
-      type: Object,
-      default: {
-        availableDatesList: {
-          id: 1,
-          values: []
-        },
-        availableDates: []
-      }
-    },
     backImage: {
       type: String,
       default: require("@/assets/images/barbershop.jpg")
-    },
-    barbers: {
-      type: Array,
-      default: [
-        {
-          id: 1,
-          name: "Vilo",
-          photo: require("@/assets/images/vilo.jpg"),
-          borderStyle: "none"
-        },
-        {
-          id: 2,
-          name: "Kubo",
-          photo: require("@/assets/images/emptyAvatar.png"),
-          borderStyle: "none"
-        }
-      ]
     },
     okStep1: {
       type: Boolean,
@@ -211,7 +191,11 @@ declare let require: any;
       type: Boolean,
       default: true
     },
-    dialogState: {
+    dialog: {
+      type: Boolean,
+      default: false
+    },
+    failDialog: {
       type: Boolean,
       default: false
     },
@@ -225,21 +209,35 @@ export default class Reservation extends Vue {
   cutType!: string;
   cutTag!: string;
   barber!: string;
-  barbers!: Array<any>;
   reservationDate!: string;
   reservationTime!: string;
   todayDate!: string;
   reservationForm!: Record<string, any>;
   allowedDates!: Record<string, any>;
   availableTimes!: Array<string>;
-  datesData!: Record<string, any>;
   reservation!: Record<string, any>;
   okStep1!: boolean;
   okStep2!: boolean;
   okStep3!: boolean;
-  dialogState!: boolean;
+  dialog!: boolean;
+  failDialog!: boolean;
   valid!: boolean;
   elementNumber!: string;
+
+  private barbers = [
+    {
+      id: 1,
+      name: this.$store.getters.barbers[0].name,
+      photo: this.$store.getters.barbers[0].photo,
+      borderStyle: "none"
+    },
+    {
+      id: 2,
+      name: this.$store.getters.barbers[1].name,
+      photo: this.$store.getters.barbers[1].photo,
+      borderStyle: "none"
+    }
+  ];
 
   private createReservation(): void {
     this.reservation = {
@@ -274,23 +272,25 @@ export default class Reservation extends Vue {
           this.reservationForm["customerNote"] +
           "&barber=" +
           this.barber +
-          "&cutType=" +
-          this.cutType +
           "&cutTag=" +
           this.cutTag
       )
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .then(response => {
-        this.deleteReservedTime();
+        alert(response.status);
+        this.reserveTime();
         this.sendMail();
-        this.dialogState = true;
+        this.dialog = true;
+      })
+      .catch(err => {
+        this.failDialog = true;
       });
   }
 
-  private deleteReservedTime(): void {
-    axios.delete(
+  private reserveTime(): void {
+    axios.post(
       process.env.VUE_APP_GEMERBARBIER_API +
-        "/deleteTime?date=" +
+        "/reserveTime?date=" +
         this.reservationDate +
         "&time=" +
         this.reservationTime +
@@ -310,14 +310,14 @@ export default class Reservation extends Vue {
     );
   }
 
-  private setBarber(barberName: string, id: number): void {
+  private async setBarber(barberName: string, id: number) {
     this.barbers.forEach(c => (c.borderStyle = "none"));
     this.barbers[id - 1].borderStyle = "solid";
     this.barber = barberName;
     this.okStep1 = false;
     this.$vuetify.goTo(document.body.scrollHeight);
     this.todayDate = new Date().toISOString().substr(0, 10);
-    axios
+    await axios
       .get(
         process.env.VUE_APP_GEMERBARBIER_API +
           "/availableDates/?barber=" +

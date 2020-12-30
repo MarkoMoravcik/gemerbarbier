@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <AdminMenu />
-    <v-div>
+    <div>
       <v-data-table
         :headers="datesHeaders"
         :items="reservationDates"
@@ -14,9 +14,7 @@
       >
         <template v-slot:top>
           <v-toolbar flat color="white">
-            <v-toolbar-title>
-              Tabuľka termínov</v-toolbar-title
-            >
+            <v-toolbar-title> Tabuľka termínov</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
@@ -24,7 +22,7 @@
               </template>
               <v-date-picker
                 locale="en-in"
-                v-model="calDate"
+                v-model="reservationDate"
                 type="date"
                 scrollable
                 :min="todayDate"
@@ -33,34 +31,55 @@
                 <v-btn text color="primary" @click="dialog = false"
                   >Cancel</v-btn
                 >
-                <v-btn text color="primary" @click="save(calDate)">OK</v-btn>
+                <v-btn text color="primary" @click="save(reservationDate)"
+                  >OK</v-btn
+                >
               </v-date-picker>
             </v-dialog>
           </v-toolbar>
         </template>
 
-        
         <template v-slot:[`item.action`]="{ item }">
           <v-icon color="red" small @click="deleteDate(item.date)">
             mdi-delete
           </v-icon>
         </template>
-        <template v-slot:expanded-item="{ item }">
-          <v-list-item
-            v-for="time in item.availableTimes"
-            :key="time.id"
-            :id="time.id"
-          >
-            <v-list-item-content>
-              <v-list-item-title>{{ time }}</v-list-item-title>
-            </v-list-item-content>
-            <v-icon color="red" small @click="deleteTime(time, item.date)">
-              mdi-delete
-            </v-icon>
-          </v-list-item>
+        <template class="lItems" v-slot:expanded-item="{ headers, item }">
+          <td :colspan="headers.length">
+            <v-list-item
+              v-for="time in item.availableTimes"
+              :key="time.id"
+              :id="time.id"
+              v-bind:style="{ width: headers.length }"
+            >
+              <v-layout align-center justify-space-between fill-height>
+                <h4 v-bind:style="{ color: time.color }">{{ time.state }}</h4>
+
+                <h4>{{ time.time }}</h4>
+
+                <v-icon
+                  v-if="time.state == 'Active'"
+                  color="red"
+                  small
+                  @click="deactiveTime(time.time, item.date)"
+                >
+                  mdi-close
+                </v-icon>
+                <v-icon
+                  v-if="time.state == 'Inactive'"
+                  color="green"
+                  small
+                  @click="activateTime(time.time, item.date)"
+                >
+                  mdi-calendar-plus
+                </v-icon>
+                <v-icon v-if="time.state == 'Reserved'"></v-icon>
+              </v-layout>
+            </v-list-item>
+          </td>
         </template>
       </v-data-table>
-    </v-div>
+    </div>
   </v-app>
 </template>
 <script lang="ts">
@@ -74,12 +93,12 @@ require("dotenv").config();
   props: {
     datesHeaders: {
       type: Array,
-      default: [
+      default: () => [
         {
           text: "Dátum",
           value: "date"
         },
-        { text: "Počet časov", value: "times" },
+        { text: "Počet aktívnych časov", value: "times" },
         { text: "", value: "data-table-expand" },
         { text: "", value: "action" }
       ]
@@ -88,44 +107,60 @@ require("dotenv").config();
       type: Boolean,
       default: true
     },
-    calDate: {
-      type: Date
+    todayDate: {
+      type: String,
+      default: new Date().toISOString().substr(0, 10)
+    },
+    reservationDate: {
+      type: String,
+      default: new Date().toISOString().substr(0, 10)
     }
   }
 })
 export default class AdminSchedulePage extends Vue {
   dialog = false;
   reservationDates: Array<Record<string, any>> = [];
-  todayDate: string = new Date().toISOString().substr(0, 10);
+  todayDate!: string;
   expanded: Array<any> = [];
 
-  private deleteDate(date: any) {
+  private async deleteDate(date: any) {
     confirm("Naozaj chcete odstrániť tento termín?") &&
-      axios.delete(
+      (await axios.delete(
         process.env.VUE_APP_GEMERBARBIER_API +
           "/deleteDate?date=" +
           date +
           "&barber=" +
           this.$store.getters.actualBarber
-      );
+      ));
     this.updateTable();
   }
 
-  private deleteTime(time: string, date: string) {
-    confirm("Naozaj chcete odsrániť tento čas?") &&
-      axios.delete(
-        process.env.VUE_APP_GEMERBARBIER_API +
-          "/deleteTime?time=" +
-          time +
-          "&date=" +
-          date +
-          "&barber=" +
-          this.$store.getters.actualBarber +
-          "&cutTag=" +
-          ""
-      );
+  private deactiveTime(time: string, date: string) {
+    axios.post(
+      process.env.VUE_APP_GEMERBARBIER_API +
+        "/deactiveTime?time=" +
+        time +
+        "&date=" +
+        date +
+        "&barber=" +
+        this.$store.getters.actualBarber
+    );
     this.updateTable();
   }
+
+  private activateTime(time: string, date: string) {
+    axios.post(
+      process.env.VUE_APP_GEMERBARBIER_API +
+        "/activateTime?time=" +
+        time +
+        "&date=" +
+        date +
+        "&barber=" +
+        this.$store.getters.actualBarber
+    );
+    this.updateTable();
+  }
+
   private async save(date: any) {
     //const formatedDate = moment(date).format("DD-MM-YYYY");
     if (this.reservationDates.filter(e => e["date"] === date).length == 0) {
@@ -158,8 +193,14 @@ export default class AdminSchedulePage extends Vue {
       )
       .then(response => {
         response.data.forEach((dateObject: any) => {
-          (dateObject["times"] = dateObject["availableTimes"].length),
-            this.reservationDates.push(dateObject);
+          let count = 0;
+          dateObject["availableTimes"].forEach(element => {
+            if (element["state"] == "Active") {
+              count++;
+            }
+          });
+          dateObject["times"] = count;
+          this.reservationDates.push(dateObject);
         });
       });
   }
@@ -169,3 +210,4 @@ export default class AdminSchedulePage extends Vue {
   }
 }
 </script>
+<style scoped></style>

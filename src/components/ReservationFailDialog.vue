@@ -2,12 +2,11 @@
   <div class="text-center">
     <v-dialog :value="value" @input="$emit('input', $event)" width="500">
       <v-card>
-        <v-card-title class="headline grey lighten-2" primary-title>
+        <v-card-title class="headline red lighten-2" primary-title>
           Rezervácia v Gemerbarbier
         </v-card-title>
         <v-card-text>
-          Vaša rezervácia bola úspešne vytvorená. Jej zhrnutie vám bolo zaslané
-          na zadaný e-mail.
+          Vybraný termín bol medzičasom obsadený. Prosím vyberte iný.
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
@@ -29,10 +28,9 @@ import { Component, Vue } from "vue-property-decorator";
     value: Boolean
   }
 })
-export default class ReservationDoneDialog extends Vue {
+export default class ReservationFailDialog extends Vue {
   private closeDialog(): void {
     this.$emit("input", false);
-    this.$router.replace({ name: "home" });
   }
 }
 </script>

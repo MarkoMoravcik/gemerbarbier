@@ -4,7 +4,7 @@
       <v-container fluid fill-height justify-center>
         <v-row justify="center" align="center">
           <v-btn
-            v-for="barber in barbers"
+            v-for="barber in this.$store.getters.barbers"
             :key="barber.name"
             class="black--text ma-9"
             dark
@@ -28,17 +28,6 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   components: {},
   props: {
-    barbers: {
-      type: Array,
-      default: [
-        {
-          name: "Vilo"
-        },
-        {
-          name: "Kubo"
-        }
-      ]
-    },
     backImage: {
       type: String,
       default: require("@/assets/images/vintageBarberWall.jpg")
