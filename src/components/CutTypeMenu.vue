@@ -66,21 +66,21 @@ import { Component, Vue } from "vue-property-decorator";
           index: 3,
           name: "Základný strih + úprava brady",
           tag: "BASIC_BEARD",
-          price: "12",
+          price: "13",
           time: "45",
           icon: "$vuetify.icons.classicCut",
           icon2: "$vuetify.icons.beardCut",
           color: "black"
-        },
-        {
-          index: 4,
-          name: "Exclusive strih",
-          tag: "EXCLUSIVE_CUT",
-          price: "14",
-          time: "45",
-          icon: "$vuetify.icons.exclusiveCut",
-          color: "black"
         }
+        // {
+        //   index: 4,
+        //   name: "Exclusive strih",
+        //   tag: "EXCLUSIVE_CUT",
+        //   price: "14",
+        //   time: "45",
+        //   icon: "$vuetify.icons.exclusiveCut",
+        //   color: "black"
+        // }
         // {
         //   index: 4,
         //   name: "Exclusive strih + úprava brady",

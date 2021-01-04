@@ -11,7 +11,6 @@ import store from "./store";
 
 Vue.use(VueRouter);
 
-// eslint-disable-next-line no-use-before-define
 const routes = <Array<RouteConfig>>[
   {
     path: "/",

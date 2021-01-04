@@ -135,34 +135,40 @@ export default class AdminSchedulePage extends Vue {
     this.updateTable();
   }
 
-  private deactiveTime(time: string, date: string) {
-    axios.post(
-      process.env.VUE_APP_GEMERBARBIER_API +
-        "/deactiveTime?time=" +
-        time +
-        "&date=" +
-        date +
-        "&barber=" +
-        this.$store.getters.actualBarber
-    );
-    this.updateTable();
+  private async deactiveTime(time: string, date: string) {
+    await axios
+      .post(
+        process.env.VUE_APP_GEMERBARBIER_API +
+          "/deactiveTime?time=" +
+          time +
+          "&date=" +
+          date +
+          "&barber=" +
+          this.$store.getters.actualBarber
+      ) // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .then(response => {
+        this.updateTable();
+      });
   }
 
-  private activateTime(time: string, date: string) {
-    axios.post(
-      process.env.VUE_APP_GEMERBARBIER_API +
-        "/activateTime?time=" +
-        time +
-        "&date=" +
-        date +
-        "&barber=" +
-        this.$store.getters.actualBarber
-    );
-    this.updateTable();
+  private async activateTime(time: string, date: string) {
+    await axios
+      .post(
+        process.env.VUE_APP_GEMERBARBIER_API +
+          "/activateTime?time=" +
+          time +
+          "&date=" +
+          date +
+          "&barber=" +
+          this.$store.getters.actualBarber
+      )
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .then(response => {
+        this.updateTable();
+      });
   }
 
   private async save(date: any) {
-    //const formatedDate = moment(date).format("DD-MM-YYYY");
     if (this.reservationDates.filter(e => e["date"] === date).length == 0) {
       await axios.post(
         process.env.VUE_APP_GEMERBARBIER_API +

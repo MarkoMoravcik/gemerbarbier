@@ -277,11 +277,11 @@ export default class Reservation extends Vue {
       )
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .then(response => {
-        alert(response.status);
         this.reserveTime();
         this.sendMail();
         this.dialog = true;
       })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .catch(err => {
         this.failDialog = true;
       });

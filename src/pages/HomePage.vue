@@ -125,7 +125,7 @@ export default class HomePage extends Vue {
   }
 
   private get buttonSize() {
-    const size = { xs: "small", sm: "medium", lg: "large" }[
+    const size = { xs: "small", sm: "medium", lg: "large", xl: "large" }[
       this.$vuetify.breakpoint.name
     ];
     return size ? { [size]: true } : {};
@@ -141,7 +141,7 @@ export default class HomePage extends Vue {
       case "md":
         return "600px";
       case "lg":
-        return "1920px";
+        return "800px";
       case "xl":
         return "1000px";
     }
