@@ -310,14 +310,14 @@ export default class Reservation extends Vue {
     );
   }
 
-  private async setBarber(barberName: string, id: number) {
+  private setBarber(barberName: string, id: number) {
     this.barbers.forEach(c => (c.borderStyle = "none"));
     this.barbers[id - 1].borderStyle = "solid";
     this.barber = barberName;
     this.okStep1 = false;
     this.$vuetify.goTo(document.body.scrollHeight);
     this.todayDate = new Date().toISOString().substr(0, 10);
-    await axios
+    axios
       .get(
         process.env.VUE_APP_GEMERBARBIER_API +
           "/availableDates/?barber=" +
