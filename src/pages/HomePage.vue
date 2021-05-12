@@ -3,15 +3,31 @@
     <v-app-bar app color="#1E283B" height="80px">
       <v-row class="justify-center align-center buttonsPanel">
         <v-btn text @click="$vuetify.goTo('#startPage')">Domov </v-btn>
-        <v-btn text @click="$vuetify.goTo('#about-us')">O nás </v-btn>
         <v-btn text @click="$vuetify.goTo('#price')">Služby/Cenník </v-btn>
+        <v-btn text @click="$vuetify.goTo('#about-us')">O nás </v-btn>
         <v-btn text @click="$vuetify.goTo('#gallery')">Galéria </v-btn>
         <v-btn text @click="$vuetify.goTo('#contact')">Kontakt </v-btn>
       </v-row>
     </v-app-bar>
     <v-content>
       <section id="startPage">
+        <v-img v-if="$vuetify.breakpoint.xs" :src="homeMobileImage">
+          <v-container justify-center fluid fill-height class="align-end">
+            <v-row
+              class="justify-center buttonsPanel"
+              style="margin-bottom: 80px;"
+            >
+              <v-btn
+                v-bind="buttonSize"
+                color="#1E283B"
+                @click="jumptToReservation()"
+                ><b>Rezervácia</b>
+              </v-btn>
+            </v-row>
+          </v-container>
+        </v-img>
         <v-img
+          v-else
           :src="homeImage"
           v-bind:style="{ position: relative, height: sectionHeight + 'px' }"
         >
@@ -22,7 +38,7 @@
             >
               <v-btn
                 v-bind="buttonSize"
-                color="#1E283B" 
+                color="#1E283B"
                 @click="jumptToReservation()"
                 ><b>Rezervácia</b>
               </v-btn>
@@ -31,15 +47,9 @@
         </v-img>
       </section>
       <section id="price">
-        <v-img
-          :src="priceListImage"
-          v-bind:style="{ position: relative, height: sectionHeight + 'px' }"
-        >
-          <div class="py-12"></div>
-          <!--<v-container class="text-center">
-          <h2 class="display-1 font-weight-bold mb-3" style="color:white">Služby/Cenník</h2>
-        </v-container>-->
+        <v-img v-if="$vuetify.breakpoint.xs" :src="priceListMobileImage">
         </v-img>
+        <v-img v-else :src="priceListImage"> </v-img>
       </section>
 
       <section id="about-us">
@@ -48,7 +58,6 @@
           fluid
           v-bind:style="{ height: sectionHeight + 'px' }"
         >
-          <div class="py-12"></div>
           <h2 class="display-1 font-weight-bold mb-3">O NÁS</h2>
 
           <!-- <v-responsive
@@ -108,9 +117,17 @@ declare let require: any;
       type: String,
       default: require("@/assets/images/gemerbarbier_homeBackground.jpg")
     },
+    homeMobileImage: {
+      type: String,
+      default: require("@/assets/images/gemerbarbier_homeBackground_phone.jpg")
+    },
     priceListImage: {
       type: String,
       default: require("@/assets/images/gemerbarbier_priceList.jpg")
+    },
+    priceListMobileImage: {
+      type: String,
+      default: require("@/assets/images/gemerbarbier_priceList_phone.jpg")
     },
     instagramIcon: {
       type: String,
@@ -172,14 +189,6 @@ export default class HomePage extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.mainBackgroundColor {
-  /* background: linear-gradient(
-    90deg,
-    rgba(30, 40, 59, 1) 45%,
-    rgba(96, 16, 19, 1) 100%
-  ); */
-}
-
 .imageProp {
   height: 858px;
 }
@@ -187,7 +196,7 @@ export default class HomePage extends Vue {
 .sectionContainer {
   display: flex;
   justify-content: center;
-  background-color:  #1E283B;;
+  background-color: #1f273a;
 }
 
 .mainBackground > .v-btn {
