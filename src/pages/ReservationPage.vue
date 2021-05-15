@@ -42,7 +42,14 @@
                 </v-row>
               </v-container>
 
-              <v-btn color="primary" @click="e1 = 2" :disabled="okStep1">
+              <v-btn
+                color="primary"
+                @click.prevent="
+                  e1 = 2;
+                  goStep2();
+                "
+                :disabled="okStep1"
+              >
                 OK
               </v-btn>
             </v-stepper-content>
@@ -53,14 +60,21 @@
               <v-divider class="mt-2"></v-divider>
 
               <CutTypeMenu @getCutType="setCutType" />
-              <v-btn color="primary" @click="e1 = 1" class="ma-1 pa-5">
+              <v-btn
+                color="primary"
+                @click.prevent="
+                  e1 = 1;
+                  scrollToHead();
+                "
+                class="ma-1 pa-5"
+              >
                 Späť
               </v-btn>
               <v-btn
                 color="primary"
                 @click.prevent="
-                  goStep3();
                   e1 = 3;
+                  goStep3();
                 "
                 :disabled="okStep2"
               >
@@ -106,12 +120,22 @@
                 </v-btn-toggle>
               </v-row>
               <v-row justify="center" class="ma-1 pa-5">
-                <v-btn color="primary" @click="e1 = 2" class="ma-1 pa-5">
+                <v-btn
+                  color="primary"
+                  @click="
+                    e1 = 2;
+                    scrollToHead();
+                  "
+                  class="ma-1 pa-5"
+                >
                   Späť
                 </v-btn>
                 <v-btn
                   color="primary"
-                  @click="e1 = 4"
+                  @click="
+                    e1 = 4;
+                    scrollToHead();
+                  "
                   class="ma-1 pa-5"
                   :disabled="okStep3"
                 >
@@ -129,7 +153,13 @@
                 @form="setReservationForm"
               />
               <v-col cols="10" md="4">
-                <v-btn color="primary" @click="e1 = 3">
+                <v-btn
+                  color="primary"
+                  @click="
+                    scrollToHead();
+                    e1 = 3;
+                  "
+                >
                   Späť
                 </v-btn>
                 <v-btn
@@ -223,6 +253,7 @@ export default class Reservation extends Vue {
   failDialog!: boolean;
   valid!: boolean;
   elementNumber!: string;
+  cuts!: Array<Record<string, any>>;
 
   private barbers = [
     {
@@ -239,7 +270,7 @@ export default class Reservation extends Vue {
     }
   ];
 
-  private createReservation(): void {
+  private async createReservation() {
     this.reservation = {
       date: this.reservationDate,
       time: this.reservationTime,
@@ -253,7 +284,7 @@ export default class Reservation extends Vue {
       cutTag: this.cutTag
     };
 
-    axios
+    await axios
       .post(
         process.env.VUE_APP_GEMERBARBIER_API +
           "reservation?date=" +
@@ -287,8 +318,8 @@ export default class Reservation extends Vue {
       });
   }
 
-  private reserveTime(): void {
-    axios.post(
+  private async reserveTime() {
+    await axios.post(
       process.env.VUE_APP_GEMERBARBIER_API +
         "/reserveTime?date=" +
         this.reservationDate +
@@ -315,30 +346,37 @@ export default class Reservation extends Vue {
     this.barbers[id - 1].borderStyle = "solid";
     this.barber = barberName;
     this.okStep1 = false;
-    this.$vuetify.goTo(document.body.scrollHeight);
+    this.scrollDown();
     this.todayDate = new Date().toISOString().substr(0, 10);
-    axios
+  }
+
+  private async setCutType(
+    cutType: string,
+    cutTag: string,
+    cuts: Array<Record<string, any>>
+  ) {
+    this.cuts = cuts;
+    this.cutType = cutType;
+    this.cutTag = cutTag;
+    this.okStep2 = false;
+    this.scrollDown();
+    await axios
       .get(
         process.env.VUE_APP_GEMERBARBIER_API +
           "/availableDates/?barber=" +
-          this.barber
+          this.barber +
+          "&cutTag=" +
+          cutTag
       )
       .then((response: any) => {
         this.allowedDates = (val: any) => response.data.indexOf(val) !== -1;
       });
   }
 
-  private setCutType(cutType: string, cutTag: string): void {
-    this.cutType = cutType;
-    this.cutTag = cutTag;
-    this.okStep2 = false;
-    this.$vuetify.goTo(document.body.scrollHeight);
-  }
-
   @Watch("reservationDate")
-  private getAvailableTimes(): void {
+  private async getAvailableTimes() {
     if (this.reservationDate != "") {
-      axios
+      await axios
         .get(
           process.env.VUE_APP_GEMERBARBIER_API +
             "/availableTimes/?date=" +
@@ -353,6 +391,7 @@ export default class Reservation extends Vue {
           this.reservationTime = this.availableTimes[0];
         });
     }
+    this.scrollDown();
   }
 
   private setValidForm(valid: boolean): void {
@@ -363,11 +402,28 @@ export default class Reservation extends Vue {
     this.reservationForm = form;
   }
 
+  private scrollToHead() {
+    this.$vuetify.goTo(document.head);
+  }
+
+  private scrollDown() {
+    if (this.$vuetify.breakpoint.xs) {
+      this.$vuetify.goTo(document.body.scrollHeight);
+    }
+  }
+
   private goStep3() {
     this.availableTimes = [];
     this.reservationDate = "";
     this.elementNumber = "";
     this.okStep3 = true;
+    this.scrollToHead();
+  }
+
+  private goStep2() {
+    this.cuts["color"] = "black";
+    this.okStep2 = true;
+    this.scrollToHead();
   }
 }
 </script>

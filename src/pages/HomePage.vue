@@ -167,23 +167,6 @@ export default class HomePage extends Vue {
   private goToInstagram() {
     window.location.href = "http://instagram.com/gemerbarbier/";
   }
-
-  // private get width() {
-  //   alert(this.$vuetify.breakpoint.name);
-  //   switch (this.$vuetify.breakpoint.name) {
-  //     case "xs":
-  //       return "200px";
-  //     case "sm":
-  //       return "400px";
-  //     case "md":
-  //       return "600px";
-  //     case "lg":
-  //       return "800px";
-  //     case "xl":
-  //       return "1000px";
-  //   }
-  //   return null;
-  // }
 }
 </script>
 

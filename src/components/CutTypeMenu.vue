@@ -114,7 +114,7 @@ export default class CutsRadioGroup extends Vue {
     this.cuts[index - 1]["color"] = "#1976d2";
     const cutType = this.cuts[index - 1]["name"];
     const cutTag = this.cuts[index - 1]["tag"];
-    this.$emit("getCutType", cutType, cutTag);
+    this.$emit("getCutType", cutType, cutTag, this.cuts[index - 1]);
   }
 }
 </script>
