@@ -189,7 +189,9 @@ export default class AdminReservationDialog extends Vue {
       .get(
         process.env.VUE_APP_GEMERBARBIER_API +
           "/availableDates/?barber=" +
-          this.$store.getters.actualBarber
+          this.$store.getters.actualBarber +
+          "&cutTag=" +
+          ""
       )
       .then((response: any) => {
         this.availableDates = (val: any) => response.data.indexOf(val) !== -1;

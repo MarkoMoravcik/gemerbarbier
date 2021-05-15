@@ -72,14 +72,18 @@
               </v-btn>
               <v-btn
                 color="primary"
-                @click.prevent="
-                  e1 = 3;
-                  goStep3();
-                "
+                @click.prevent="getAvailableDates"
                 :disabled="okStep2"
               >
                 OK
               </v-btn>
+              <v-overlay v-if="waitingDatesRequest" :value="overlay">
+                <v-progress-circular
+                  :size="50"
+                  color="primary"
+                  indeterminate
+                ></v-progress-circular>
+              </v-overlay>
             </v-stepper-content>
 
             <v-stepper-content step="3">
@@ -232,6 +236,10 @@ declare let require: any;
     valid: {
       type: Boolean,
       default: false
+    },
+    waitingDatesRequest: {
+      type: Boolean,
+      default: false
     }
   }
 })
@@ -252,8 +260,10 @@ export default class Reservation extends Vue {
   dialog!: boolean;
   failDialog!: boolean;
   valid!: boolean;
+  waitingDatesRequest!: boolean;
   elementNumber!: string;
   cuts!: Array<Record<string, any>>;
+  e1!: number;
 
   private barbers = [
     {
@@ -346,11 +356,11 @@ export default class Reservation extends Vue {
     this.barbers[id - 1].borderStyle = "solid";
     this.barber = barberName;
     this.okStep1 = false;
-    this.scrollDown();
     this.todayDate = new Date().toISOString().substr(0, 10);
+    this.scrollDown();
   }
 
-  private async setCutType(
+  private setCutType(
     cutType: string,
     cutTag: string,
     cuts: Array<Record<string, any>>
@@ -358,18 +368,26 @@ export default class Reservation extends Vue {
     this.cuts = cuts;
     this.cutType = cutType;
     this.cutTag = cutTag;
-    this.okStep2 = false;
     this.scrollDown();
+    this.okStep2 = false;
+  }
+
+  private async getAvailableDates() {
+    this.waitingDatesRequest = true;
     await axios
       .get(
         process.env.VUE_APP_GEMERBARBIER_API +
           "/availableDates/?barber=" +
           this.barber +
           "&cutTag=" +
-          cutTag
+          this.cutTag,
+        { timeout: 30000 }
       )
       .then((response: any) => {
         this.allowedDates = (val: any) => response.data.indexOf(val) !== -1;
+        this.waitingDatesRequest = false;
+        this.e1 = 3;
+        this.goStep3();
       });
   }
 
