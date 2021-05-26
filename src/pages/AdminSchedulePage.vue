@@ -21,7 +21,8 @@
                 <v-btn color="success" v-on="on">Pridaj termín</v-btn>
               </template>
               <v-date-picker
-                locale="en-in"
+                locale="sk-SK"
+                :first-day-of-week="1"
                 v-model="reservationDate"
                 type="date"
                 scrollable

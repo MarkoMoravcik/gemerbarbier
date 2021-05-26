@@ -64,7 +64,7 @@
       <v-sheet height="500">
         <v-calendar
           ref="calendar"
-          locale="en"
+          locale="sk-SK"
           v-model="focus"
           color="primary"
           :events="events"

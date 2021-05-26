@@ -96,6 +96,8 @@
                   v-model="reservationDate"
                   :min="todayDate"
                   :allowed-dates="allowedDates"
+                  :first-day-of-week="1"
+                  locale="sk-SK"
                   @change="okStep3 = false"
                 ></v-date-picker>
 

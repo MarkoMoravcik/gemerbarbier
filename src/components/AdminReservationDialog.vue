@@ -1,7 +1,8 @@
 <template>
   <v-dialog :value="value" @input="$emit('input', $event)" max-width="500px">
     <v-date-picker
-      locale="en-in"
+      locale="sk-SK"
+      :first-day-of-week="1"
       v-model="reservationDate"
       :allowed-dates="availableDates"
       type="date"
