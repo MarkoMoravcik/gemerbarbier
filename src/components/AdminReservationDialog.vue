@@ -167,7 +167,7 @@ export default class AdminReservationDialog extends Vue {
       await axios
         .get(
           process.env.VUE_APP_GEMERBARBIER_API +
-            "/availableTimes/?date=" +
+            "/allTimes/?date=" +
             this.reservationDate +
             "&barber=" +
             this.$store.getters.actualBarber +
@@ -189,7 +189,7 @@ export default class AdminReservationDialog extends Vue {
     await axios
       .get(
         process.env.VUE_APP_GEMERBARBIER_API +
-          "/availableDates/?barber=" +
+          "/allDates/?barber=" +
           this.$store.getters.actualBarber +
           "&cutTag=" +
           ""

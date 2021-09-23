@@ -44,8 +44,19 @@
           <v-icon color="red" small @click="deleteDate(item.date)">
             mdi-delete
           </v-icon>
+          <v-icon
+            class="mr-4"
+            color="green"
+            small
+            @click="activeInactiveTimes(item.date)"
+          >
+            mdi-plus-circle
+          </v-icon>
         </template>
-        <template class="lItems" v-slot:expanded-item="{ headers, item }">
+        <template
+          class="lItems table-font"
+          v-slot:expanded-item="{ headers, item }"
+        >
           <td :colspan="headers.length">
             <v-list-item
               v-for="time in item.availableTimes"
@@ -53,7 +64,12 @@
               :id="time.id"
               v-bind:style="{ width: headers.length }"
             >
-              <v-layout align-center justify-space-between fill-height>
+              <v-layout
+                class="table-font"
+                align-center
+                justify-space-between
+                fill-height
+              >
                 <h4 v-bind:style="{ color: time.color }">{{ time.state }}</h4>
 
                 <h4>{{ time.time }}</h4>
@@ -194,6 +210,21 @@ export default class AdminSchedulePage extends Vue {
     this.updateTable();
   }
 
+  private async activeInactiveTimes(date: string) {
+    await axios
+      .post(
+        process.env.VUE_APP_GEMERBARBIER_API +
+          "/activateInactiveTimes?date=" +
+          date +
+          "&barber=" +
+          this.$store.getters.actualBarber
+      )
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .then(response => {
+        this.updateTable();
+      });
+  }
+
   private async updateTable() {
     this.reservationDates = [];
     await axios
@@ -221,4 +252,8 @@ export default class AdminSchedulePage extends Vue {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.table-font > h4 {
+  font-size: 16px;
+}
+</style>
