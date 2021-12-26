@@ -76,9 +76,9 @@ export default class AdminReservationDialog extends Vue {
   private firstName!: string;
   private lastName!: string;
   private reservationDate!: string;
-  private valid!: boolean;
-  private availableTimes!: Array<string>;
-  private availableDates!: Record<string, any>;
+  valid!: boolean;
+  availableTimes!: Array<string>;
+  availableDates!: Record<string, any>;
   private cutTag!: string;
   private reservationTime!: string;
 
@@ -91,7 +91,7 @@ export default class AdminReservationDialog extends Vue {
   @Watch("lastName")
   @Watch("cutTag")
   @Watch("reservationTime")
-  private check(): void {
+  check(): void {
     if (
       this.firstName.length > 0 &&
       this.lastName.length > 0 &&
@@ -105,7 +105,7 @@ export default class AdminReservationDialog extends Vue {
     }
   }
 
-  private async createReservation() {
+  async createReservation() {
     await axios
       .post(
         process.env.VUE_APP_GEMERBARBIER_API +
@@ -144,6 +144,7 @@ export default class AdminReservationDialog extends Vue {
     this.reservationTime = "";
     this.cutTag = "";
     this.reservationDate = "";
+    this.availableDates = {};
   }
 
   private async reserveTime() {
@@ -162,7 +163,7 @@ export default class AdminReservationDialog extends Vue {
 
   @Watch("reservationDate")
   @Watch("cutTag")
-  private async getAvailableTimes() {
+  async getAvailableTimes() {
     if (this.cutTag.length > 0 && this.reservationDate.length > 0) {
       await axios
         .get(
@@ -181,8 +182,8 @@ export default class AdminReservationDialog extends Vue {
     }
   }
 
-  async mounted() {
-    await this.getAvailableDates();
+  mounted(){
+    this.getAvailableDates();
   }
 
   private async getAvailableDates() {

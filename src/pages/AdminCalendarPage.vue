@@ -107,7 +107,9 @@
               <v-divider></v-divider>
               <span v-html="selectedEvent.email"></span>
               <br />
-              <span v-html="selectedEvent.phoneNumber"></span>
+              <a href="tel:'`${selectedEvent.phoneNumber}`">{{
+                selectedEvent.phoneNumber
+              }}</a>
               <br />
               <span v-html="selectedEvent.note"></span>
             </v-card-text>
