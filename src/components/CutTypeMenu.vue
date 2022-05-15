@@ -46,51 +46,52 @@ import { Component, Vue } from "vue-property-decorator";
       default: [
         {
           index: 1,
-          name: "Úprava brady",
-          tag: "BEARD",
-          price: "5",
-          time: "15",
-          icon: "$vuetify.icons.beardCut",
+          name: "Rýchly strih",
+          tag: "BASIC_CUT",
+          price: "7",
+          time: "20",
+          icon: "$vuetify.icons.classicCut",
           color: "black"
         },
         {
           index: 2,
-          name: "Základný strih",
-          tag: "BASIC_CUT",
-          price: "8",
-          time: "30",
-          icon: "$vuetify.icons.classicCut",
+          name: "Exclusive strih",
+          tag: "EXCLUSIVE_CUT",
+          price: "10",
+          time: "40",
+          icon: "$vuetify.icons.exclusiveCut",
           color: "black"
         },
         {
           index: 3,
-          name: "Základný strih + úprava brady",
+          name: "Úprava brady",
+          tag: "BEARD",
+          price: "7",
+          time: "20",
+          icon: "$vuetify.icons.beardCut",
+          color: "black"
+        },
+        {
+          index: 4,
+          name: "Rýchly strih + úprava brady",
           tag: "BASIC_BEARD",
-          price: "13",
-          time: "45",
+          price: "14",
+          time: "40",
           icon: "$vuetify.icons.classicCut",
           icon2: "$vuetify.icons.beardCut",
           color: "black"
+        },
+
+        {
+          index: 5,
+          name: "Exclusive strih + úprava brady",
+          tag: "EXCLUSIVE_BEARD",
+          price: "18",
+          time: "60",
+          icon: "$vuetify.icons.exclusiveCut",
+          icon2: "$vuetify.icons.beardCut",
+          color: "black"
         }
-        // {
-        //   index: 4,
-        //   name: "Exclusive strih",
-        //   tag: "EXCLUSIVE_CUT",
-        //   price: "14",
-        //   time: "45",
-        //   icon: "$vuetify.icons.exclusiveCut",
-        //   color: "black"
-        // }
-        // {
-        //   index: 4,
-        //   name: "Exclusive strih + úprava brady",
-        //   tag: "EXCLUSIVE_BEARD",
-        //   price: "18",
-        //   time: "60",
-        //   icon: "$vuetify.icons.exclusiveCut",
-        //   icon2: "$vuetify.icons.beardCut",
-        //   color: "black"
-        // }
       ]
     },
     iconSize: {
@@ -107,7 +108,7 @@ export default class CutsRadioGroup extends Vue {
   cuts!: Array<Record<string, any>>;
 
   cutContainsBeard(cut: any) {
-    return cut.includes("BASIC_BEARD");
+    return cut.includes("_BEARD");
   }
   selectCut(index: any) {
     this.cuts.map(a => (a["color"] = "black"));

@@ -108,7 +108,7 @@
               <span v-html="selectedEvent.email"></span>
               <br />
               <a :href="`tel:+${selectedEvent.phoneNumber}`">
-                +{{ selectedEvent.phoneNumber }}
+                {{ selectedEvent.phoneNumber }}
               </a>
               <br />
               <span v-html="selectedEvent.note"></span>

@@ -10,7 +10,7 @@
       </v-row>
     </v-app-bar>
     <v-content>
-      <section id="startPage">
+      <section id="startPage" class="section-with-map">
         <v-img v-if="$vuetify.breakpoint.xs" :src="homeMobileImage">
           <v-container justify-center fluid fill-height class="align-end">
             <v-row
@@ -29,7 +29,6 @@
         <v-img
           v-else
           :src="homeImage"
-          v-bind:style="{ position: relative, height: sectionHeight + 'px' }"
         >
           <v-container justify-center fluid fill-height class="align-end">
             <v-row
@@ -46,52 +45,137 @@
           </v-container>
         </v-img>
       </section>
-      <section id="price">
-        <v-img v-if="$vuetify.breakpoint.xs" :src="priceListMobileImage">
-        </v-img>
-        <v-img v-else :src="priceListImage"> </v-img>
-      </section>
-
-      <section id="about-us">
+      <section id="price" class="section">
         <v-container
           class="sectionContainer"
+  
+        >
+          <div class="service-wrapper">
+   
+            <div
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+            >
+              <img
+                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fd7c51a22c2c706c36_AOQ_web_1.png"
+                width="60"
+                alt="Number 1"
+                class="service-icon"
+              />
+              <h4 class="subheading">Úprava brady</h4>
+              <p class="paragraph-b2 ondark">
+                7 €<br />Consultation, cut, blow dry, and style with
+                premium products. Includes a complimentary hot lather neck shave
+                with straight razor.
+              </p>
+            </div>
+            <div
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+            >
+              <img
+                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fda66e814c5a01b85a_AOQ_web_2.png"
+                width="60"
+                alt="Number 2"
+                class="service-icon"
+              />
+              <h4 class="subheading">Rýchly strih</h4>
+              <p class="paragraph-b2 ondark">
+                7 €<br />Pre nenáročných zákazníkov ktorí si nepotrpia na čistú postupku alebo kontúry, skôr pre klasikov ktorí chcú len skrátiť vlasy a ďalej nič nerieši.<br />
+              </p>
+            </div>
+            <div
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+            >
+              <img
+                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fd7c51a2443f706c37_AOQ_web_3.png"
+                width="60"
+                alt="Number 3"
+                class="service-icon"
+              />
+              <h4 class="subheading">Rýchly strih &amp; Úprava brady</h4>
+              <p class="paragraph-b2 ondark">
+                14 €<br />No bad hair days here. Everything
+                you need to stay fresh and so clean. Take it up a notch with a
+                premium, nourishing hair treatment add-on.
+              </p>
+            </div>
+            <div
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+            >
+              <img
+                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fd0c377d46b11d355b_AOQ_web_4.png"
+                width="60"
+                alt="Number 4"
+                class="service-icon"
+              />
+              <h4 class="subheading">Exclusive strih</h4>
+              <p class="paragraph-b2 ondark">
+                10 €<br />Pre zákazníkov ktorí si potrpia na každý detail a chcú tu najlepšie odvedenú prácu , radi používajú produkt vo vlasoch alebo len chcú tu najčistejšiu postupku, kontúry upravené britvou
+              </p>
+            </div>
+                        <div
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+            >
+              <img
+                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fd0c377d46b11d355b_AOQ_web_4.png"
+                width="60"
+                alt="Number 4"
+                class="service-icon"
+              />
+              <h4 class="subheading">Exclusive strih &amp; Úprava brady</h4>
+              <p class="paragraph-b2 ondark">
+                18 €<br />&zwj;Pre-shave lotion massage and
+                hot towel steam for a closer, more comfortable shave. Followed
+                by cold a towel press to close pores and cleanse face, finished
+                with a cooling after-shave tonic.&nbsp;
+              </p>
+            </div>
+    
+          </div>
+        </v-container>
+      </section>
+
+      <section id="about-us" class="section">
+        <!-- <v-container
+          class="sectionContainer"
           fluid
-          v-bind:style="{ height: sectionHeight + 'px' }"
+
         >
           <h2 class="display-1 font-weight-bold mb-3">O NÁS</h2>
 
-          <!-- <v-responsive
-            class="mx-auto title font-weight-light mb-8"
-            max-width="720"
-          >
-            Gemerbarbier
-          </v-responsive> -->
-        </v-container>
+        </v-container> -->
       </section>
-      <section id="gallery">
+      <section id="gallery" class="section">
         <v-container
           class="align-center sectionContainer"
           fluid
-          v-bind:style="{ height: sectionHeight + 'px' }"
+
         >
           <Gallery />
         </v-container>
       </section>
-      <section id="contact">
-        <v-container
-          class="align-content-space-between flex-wrap sectionContainer"
-          v-bind:style="{ height: sectionHeight + 'px' }"
-          fluid
+      <section id="contact" class="section-with-map">
+        <v-div
+          class="container-2" 
         >
-          <v-column>
+          <!-- <v-column>
             <v-img
               :src="instagramIcon"
               class="icon"
               @click="goToInstagram"
             ></v-img>
-          </v-column>
+          </v-column> -->
 
-          <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="16">
+          <GmapMap
+            :center="center"
+            :map-type-id="mapTypeId"
+            :zoom="16"
+            :style="a"
+          >
             <GmapMarker
               v-for="(item, index) in markers"
               :key="index"
@@ -99,8 +183,9 @@
               @click="center = item.position"
             />
           </GmapMap>
-        </v-container>
+        </v-div>
       </section>
+
     </v-content>
   </v-app>
 </template>
@@ -132,6 +217,14 @@ declare let require: any;
     instagramIcon: {
       type: String,
       default: require("@/assets/images/instagramIcon.png")
+    },
+         beardImage: {
+      type: String,
+      default: require("@/assets/images/barbershop.jpg")
+    },
+      cutImage: {
+      type: String,
+      default: require("@/assets/images/barbershop.jpg")
     },
     center: {
       type: Object,
@@ -180,6 +273,11 @@ export default class HomePage extends Vue {
   display: flex;
   justify-content: center;
   background-color: #1f273a;
+  align-items: center;
+  padding-top: 10px;
+  padding-right: 10%;
+  padding-bottom: 100px;
+    padding-left: 10%;
 }
 
 .mainBackground > .v-btn {
@@ -222,4 +320,48 @@ export default class HomePage extends Vue {
   line-height: 49px;
   letter-spacing: 1px;
 }
+
+.service-info{
+  width: 50%;
+  display: flex;
+  margin-bottom: 40px;
+  padding-right: 16px;
+  padding-left: 16px;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  color: #e5ca9f;
+}
+
+.service-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+.service-icon{
+      height: 60px;
+    margin-bottom: 16px;
+}
+
+.section {
+    display: flex;
+    padding: 100px 10%;
+    align-items: center;
+    background: #1f273a;
+}
+
+.section-with-map {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        background: #1f273a;
+}
+.container-2 {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 </style>

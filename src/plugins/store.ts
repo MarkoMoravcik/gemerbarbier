@@ -30,7 +30,13 @@ export default new Vuex.Store({
         icon: ""
       }
     ],
-    cutTags: ["BEARD", "BASIC_CUT", "BASIC_BEARD", "EXCLUSIVE_CUT"],
+    cutTags: [
+      "BEARD",
+      "BASIC_CUT",
+      "BASIC_BEARD",
+      "EXCLUSIVE_CUT",
+      "EXCLUSIVE_BEARD"
+    ],
     authenticated: false,
     actualBarberMenu: null
   },

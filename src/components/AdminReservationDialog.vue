@@ -182,7 +182,7 @@ export default class AdminReservationDialog extends Vue {
     }
   }
 
-  mounted(){
+  mounted() {
     this.getAvailableDates();
   }
 
