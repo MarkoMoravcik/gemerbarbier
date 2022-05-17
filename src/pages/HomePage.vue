@@ -26,14 +26,11 @@
             </v-row>
           </v-container>
         </v-img>
-        <v-img
-          v-else
-          :src="homeImage"
-        >
+        <v-img v-else :src="homeImage">
           <v-container justify-center fluid fill-height class="align-end">
             <v-row
               class="justify-center buttonsPanel mb-11"
-              style="margin-bottom: 80px;"
+              style="margin-bottom: 100px;"
             >
               <v-btn
                 v-bind="buttonSize"
@@ -46,12 +43,8 @@
         </v-img>
       </section>
       <section id="price" class="section">
-        <v-container
-          class="sectionContainer"
-  
-        >
+        <v-container class="sectionContainer">
           <div class="service-wrapper">
-   
             <div
               class="service-info"
               style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
@@ -63,10 +56,12 @@
                 class="service-icon"
               />
               <h4 class="subheading">Úprava brady</h4>
-              <p class="paragraph-b2 ondark">
-                7 €<br />Consultation, cut, blow dry, and style with
-                premium products. Includes a complimentary hot lather neck shave
-                with straight razor.
+              <h5>7 €</h5>
+              <p>Pre každého zákazníka, či už s bradou alebo strniskom.
+                Proces začína zarovnaním brady a fúzov, potom prichádza na rad
+                teplý vlhký uterák a zarovnanie s britvou, ďalej nasleduje voda
+                po holeni na uzatvorenie pórov a nakoniec púder pre ukľudnenie
+                pokožky.
               </p>
             </div>
             <div
@@ -80,8 +75,11 @@
                 class="service-icon"
               />
               <h4 class="subheading">Rýchly strih</h4>
-              <p class="paragraph-b2 ondark">
-                7 €<br />Pre nenáročných zákazníkov ktorí si nepotrpia na čistú postupku alebo kontúry, skôr pre klasikov ktorí chcú len skrátiť vlasy a ďalej nič nerieši.<br />
+              <h5>7 €</h5>
+              <p>
+                Pre nenáročných zákazníkov ktorí si nepotrpia na čistú
+                postupku alebo kontúry, skôr pre klasikov ktorí chcú len skrátiť
+                vlasy a ďalej nič neriešiť.
               </p>
             </div>
             <div
@@ -95,10 +93,8 @@
                 class="service-icon"
               />
               <h4 class="subheading">Rýchly strih &amp; Úprava brady</h4>
-              <p class="paragraph-b2 ondark">
-                14 €<br />No bad hair days here. Everything
-                you need to stay fresh and so clean. Take it up a notch with a
-                premium, nourishing hair treatment add-on.
+                        <h5>14 €</h5>
+              <p>Rýchly strih doplnený o úpravu brady.
               </p>
             </div>
             <div
@@ -112,11 +108,13 @@
                 class="service-icon"
               />
               <h4 class="subheading">Exclusive strih</h4>
-              <p class="paragraph-b2 ondark">
-                10 €<br />Pre zákazníkov ktorí si potrpia na každý detail a chcú tu najlepšie odvedenú prácu , radi používajú produkt vo vlasoch alebo len chcú tu najčistejšiu postupku, kontúry upravené britvou
+                        <h5>10 €</h5>
+              <p>Detailné strihanie, kde sa vždy snažíme zladiť účes s
+                tvarom hlavy a vašim štýlom, detailná postupka. Samozrejmosťou
+                je aj umytie vlasov v prípade, že nie sú vhodné na strihanie.
               </p>
             </div>
-                        <div
+            <div
               class="service-info"
               style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
@@ -127,14 +125,10 @@
                 class="service-icon"
               />
               <h4 class="subheading">Exclusive strih &amp; Úprava brady</h4>
-              <p class="paragraph-b2 ondark">
-                18 €<br />&zwj;Pre-shave lotion massage and
-                hot towel steam for a closer, more comfortable shave. Followed
-                by cold a towel press to close pores and cleanse face, finished
-                with a cooling after-shave tonic.&nbsp;
+                        <h5>18 €</h5>
+              <p>Detailný strih doplnený o úpravu brady.
               </p>
             </div>
-    
           </div>
         </v-container>
       </section>
@@ -150,18 +144,12 @@
         </v-container> -->
       </section>
       <section id="gallery" class="section">
-        <v-container
-          class="align-center sectionContainer"
-          fluid
-
-        >
+        <v-container class="align-center sectionContainer" fluid>
           <Gallery />
         </v-container>
       </section>
       <section id="contact" class="section-with-map">
-        <v-div
-          class="container-2" 
-        >
+        <v-div class="container-2">
           <!-- <v-column>
             <v-img
               :src="instagramIcon"
@@ -185,7 +173,6 @@
           </GmapMap>
         </v-div>
       </section>
-
     </v-content>
   </v-app>
 </template>
@@ -218,11 +205,11 @@ declare let require: any;
       type: String,
       default: require("@/assets/images/instagramIcon.png")
     },
-         beardImage: {
+    beardImage: {
       type: String,
       default: require("@/assets/images/barbershop.jpg")
     },
-      cutImage: {
+    cutImage: {
       type: String,
       default: require("@/assets/images/barbershop.jpg")
     },
@@ -277,7 +264,7 @@ export default class HomePage extends Vue {
   padding-top: 10px;
   padding-right: 10%;
   padding-bottom: 100px;
-    padding-left: 10%;
+  padding-left: 10%;
 }
 
 .mainBackground > .v-btn {
@@ -321,7 +308,7 @@ export default class HomePage extends Vue {
   letter-spacing: 1px;
 }
 
-.service-info{
+.service-info {
   width: 50%;
   display: flex;
   margin-bottom: 40px;
@@ -333,35 +320,34 @@ export default class HomePage extends Vue {
   color: #e5ca9f;
 }
 
-.service-wrapper{
+.service-wrapper {
   display: flex;
   flex-wrap: wrap;
 }
-.service-icon{
-      height: 60px;
-    margin-bottom: 16px;
+.service-icon {
+  height: 60px;
+  margin-bottom: 16px;
 }
 
 .section {
-    display: flex;
-    padding: 100px 10%;
-    align-items: center;
-    background: #1f273a;
+  display: flex;
+  padding: 100px 10%;
+  align-items: center;
+  background: #1f273a;
 }
 
 .section-with-map {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-        background: #1f273a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1f273a;
 }
 .container-2 {
-    display: flex;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
-
 </style>
