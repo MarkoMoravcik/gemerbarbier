@@ -57,10 +57,11 @@
               />
               <h4 class="subheading">Úprava brady</h4>
               <h5>7 €</h5>
-              <p>Pre každého zákazníka, či už s bradou alebo strniskom.
-                Proces začína zarovnaním brady a fúzov, potom prichádza na rad
-                teplý vlhký uterák a zarovnanie s britvou, ďalej nasleduje voda
-                po holeni na uzatvorenie pórov a nakoniec púder pre ukľudnenie
+              <p>
+                Pre každého zákazníka, či už s bradou alebo strniskom. Proces
+                začína zarovnaním brady a fúzov, potom prichádza na rad teplý
+                vlhký uterák a zarovnanie s britvou, ďalej nasleduje voda po
+                holeni na uzatvorenie pórov a nakoniec púder pre ukľudnenie
                 pokožky.
               </p>
             </div>
@@ -77,9 +78,9 @@
               <h4 class="subheading">Rýchly strih</h4>
               <h5>7 €</h5>
               <p>
-                Pre nenáročných zákazníkov ktorí si nepotrpia na čistú
-                postupku alebo kontúry, skôr pre klasikov ktorí chcú len skrátiť
-                vlasy a ďalej nič neriešiť.
+                Pre nenáročných zákazníkov ktorí si nepotrpia na čistú postupku
+                alebo kontúry, skôr pre klasikov ktorí chcú len skrátiť vlasy a
+                ďalej nič neriešiť.
               </p>
             </div>
             <div
@@ -93,9 +94,8 @@
                 class="service-icon"
               />
               <h4 class="subheading">Rýchly strih &amp; Úprava brady</h4>
-                        <h5>14 €</h5>
-              <p>Rýchly strih doplnený o úpravu brady.
-              </p>
+              <h5>14 €</h5>
+              <p>Rýchly strih doplnený o úpravu brady.</p>
             </div>
             <div
               class="service-info"
@@ -108,10 +108,11 @@
                 class="service-icon"
               />
               <h4 class="subheading">Exclusive strih</h4>
-                        <h5>10 €</h5>
-              <p>Detailné strihanie, kde sa vždy snažíme zladiť účes s
-                tvarom hlavy a vašim štýlom, detailná postupka. Samozrejmosťou
-                je aj umytie vlasov v prípade, že nie sú vhodné na strihanie.
+              <h5>10 €</h5>
+              <p>
+                Detailné strihanie, kde sa vždy snažíme zladiť účes s tvarom
+                hlavy a vašim štýlom, detailná postupka. Samozrejmosťou je aj
+                umytie vlasov v prípade, že nie sú vhodné na strihanie.
               </p>
             </div>
             <div
@@ -125,9 +126,8 @@
                 class="service-icon"
               />
               <h4 class="subheading">Exclusive strih &amp; Úprava brady</h4>
-                        <h5>18 €</h5>
-              <p>Detailný strih doplnený o úpravu brady.
-              </p>
+              <h5>18 €</h5>
+              <p>Detailný strih doplnený o úpravu brady.</p>
             </div>
           </div>
         </v-container>
@@ -158,12 +158,7 @@
             ></v-img>
           </v-column> -->
 
-          <GmapMap
-            :center="center"
-            :map-type-id="mapTypeId"
-            :zoom="16"
-            :style="a"
-          >
+          <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="16">
             <GmapMarker
               v-for="(item, index) in markers"
               :key="index"
@@ -215,7 +210,7 @@ declare let require: any;
     },
     center: {
       type: Object,
-      default: { lat: 48.684073, lng: 20.1217573 }
+      default: () => ({ lat: 48.684073, lng: 20.1217573 })
     },
     mapTypeId: {
       type: String,
@@ -223,28 +218,28 @@ declare let require: any;
     },
     markers: {
       type: Array,
-      default: [{ position: { lat: 48.684073, lng: 20.1217573 } }]
+      default: () => [{ position: { lat: 48.684073, lng: 20.1217573 } }]
     }
   }
 })
 export default class HomePage extends Vue {
-  private jumptToReservation() {
+  jumptToReservation() {
     const routeData = this.$router.resolve({ name: "reservation" });
     window.open(routeData.href, "_blank");
   }
 
-  private get buttonSize() {
+  get buttonSize() {
     const size = { xs: "medium", sm: "medium", lg: "large", xl: "large" }[
       this.$vuetify.breakpoint.name
     ];
     return size ? { [size]: true } : {};
   }
 
-  private get sectionHeight() {
+  get sectionHeight() {
     return window.innerHeight - 80;
   }
 
-  private goToInstagram() {
+  goToInstagram() {
     window.location.href = "http://instagram.com/gemerbarbier/";
   }
 }

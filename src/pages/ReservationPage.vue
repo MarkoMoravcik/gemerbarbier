@@ -111,8 +111,8 @@
                     <v-div class="time-picker">
                       <v-btn
                         v-for="item in availableTimes"
-                        :key="item.id"
-                        :id="item.id"
+                        :key="item"
+                        :id="item"
                         rounded
                         text
                         @click="
@@ -246,6 +246,7 @@ declare let require: any;
   }
 })
 export default class Reservation extends Vue {
+  [x: string]: any;
   cutType!: string;
   cutTag!: string;
   barber!: string;
@@ -267,7 +268,7 @@ export default class Reservation extends Vue {
   cuts!: Array<Record<string, any>>;
   e1!: number;
 
-  private barbers = [
+  barbers = [
     {
       id: 1,
       name: this.$store.getters.barbers[0].name,
@@ -282,7 +283,7 @@ export default class Reservation extends Vue {
     }
   ];
 
-  private async createReservation() {
+  async createReservation() {
     this.reservation = {
       date: this.reservationDate,
       time: this.reservationTime,
@@ -353,7 +354,7 @@ export default class Reservation extends Vue {
     );
   }
 
-  private setBarber(barberName: string, id: number) {
+  setBarber(barberName: string, id: number) {
     this.barbers.forEach(c => (c.borderStyle = "none"));
     this.barbers[id - 1].borderStyle = "solid";
     this.barber = barberName;
@@ -362,7 +363,7 @@ export default class Reservation extends Vue {
     this.scrollDown();
   }
 
-  private setCutType(
+  setCutType(
     cutType: string,
     cutTag: string,
     cuts: Array<Record<string, any>>
@@ -374,7 +375,7 @@ export default class Reservation extends Vue {
     this.okStep2 = false;
   }
 
-  private async getAvailableDates() {
+  async getAvailableDates() {
     this.waitingDatesRequest = true;
     await axios
       .get(
@@ -394,7 +395,7 @@ export default class Reservation extends Vue {
   }
 
   @Watch("reservationDate")
-  private async getAvailableTimes() {
+  async getAvailableTimes() {
     if (this.reservationDate != "") {
       await axios
         .get(
@@ -414,25 +415,25 @@ export default class Reservation extends Vue {
     this.scrollDown();
   }
 
-  private setValidForm(valid: boolean): void {
+  setValidForm(valid: boolean): void {
     this.valid = valid;
   }
 
-  private setReservationForm(form: object): void {
+  setReservationForm(form: object): void {
     this.reservationForm = form;
   }
 
-  private scrollToHead() {
+  scrollToHead() {
     this.$vuetify.goTo(document.head);
   }
 
-  private scrollDown() {
+  scrollDown() {
     if (this.$vuetify.breakpoint.xs) {
       this.$vuetify.goTo(document.body.scrollHeight);
     }
   }
 
-  private goStep3() {
+  goStep3() {
     this.availableTimes = [];
     this.reservationDate = "";
     this.elementNumber = "";
@@ -440,7 +441,7 @@ export default class Reservation extends Vue {
     this.scrollToHead();
   }
 
-  private goStep2() {
+  goStep2() {
     this.cuts["color"] = "black";
     this.okStep2 = true;
     this.scrollToHead();

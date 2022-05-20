@@ -46,20 +46,20 @@ import { Component, Vue } from "vue-property-decorator";
       default: [
         {
           index: 1,
-          name: "Rýchly strih",
-          tag: "BASIC_CUT",
-          price: "7",
-          time: "20",
-          icon: "$vuetify.icons.classicCut",
-          color: "black"
-        },
-        {
-          index: 2,
           name: "Exclusive strih",
           tag: "EXCLUSIVE_CUT",
           price: "10",
           time: "40",
           icon: "$vuetify.icons.exclusiveCut",
+          color: "black"
+        },
+        {
+          index: 2,
+          name: "Rýchly strih",
+          tag: "BASIC_CUT",
+          price: "7",
+          time: "20",
+          icon: "$vuetify.icons.classicCut",
           color: "black"
         },
         {
