@@ -162,8 +162,8 @@
                 <v-btn
                   color="primary"
                   @click="
-                    scrollToHead();
                     e1 = 3;
+                    scrollToHead();
                   "
                 >
                   Späť
@@ -424,7 +424,7 @@ export default class Reservation extends Vue {
   }
 
   scrollToHead() {
-    this.$vuetify.goTo(document.head);
+    window.scrollTo(0, 0);
   }
 
   scrollDown() {
@@ -434,17 +434,17 @@ export default class Reservation extends Vue {
   }
 
   goStep3() {
+    this.scrollToHead();
     this.availableTimes = [];
     this.reservationDate = "";
     this.elementNumber = "";
     this.okStep3 = true;
-    this.scrollToHead();
   }
 
   goStep2() {
+    this.scrollToHead();
     this.cuts["color"] = "black";
     this.okStep2 = true;
-    this.scrollToHead();
   }
 }
 </script>

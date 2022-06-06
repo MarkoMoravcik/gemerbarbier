@@ -75,7 +75,7 @@
                 alt="Number 2"
                 class="service-icon"
               />
-              <h4 class="subheading">Rýchly strih</h4>
+              <h4 class="subheading">Obyčajný strih</h4>
               <h5>7 €</h5>
               <p>
                 Pre nenáročných zákazníkov ktorí si nepotrpia na čistú postupku
@@ -93,7 +93,7 @@
                 alt="Number 3"
                 class="service-icon"
               />
-              <h4 class="subheading">Rýchly strih &amp; Úprava brady</h4>
+              <h4 class="subheading">Obyčajný strih &amp; Úprava brady</h4>
               <h5>14 €</h5>
               <p>Rýchly strih doplnený o úpravu brady.</p>
             </div>
@@ -107,7 +107,7 @@
                 alt="Number 4"
                 class="service-icon"
               />
-              <h4 class="subheading">Exclusive strih</h4>
+              <h4 class="subheading">Exclusive barber strih</h4>
               <h5>10 €</h5>
               <p>
                 Detailné strihanie, kde sa vždy snažíme zladiť účes s tvarom
@@ -125,7 +125,9 @@
                 alt="Number 4"
                 class="service-icon"
               />
-              <h4 class="subheading">Exclusive strih &amp; Úprava brady</h4>
+              <h4 class="subheading">
+                Exclusive barber strih &amp; Úprava brady
+              </h4>
               <h5>18 €</h5>
               <p>Detailný strih doplnený o úpravu brady.</p>
             </div>

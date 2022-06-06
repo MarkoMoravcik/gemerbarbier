@@ -46,7 +46,7 @@ import { Component, Vue } from "vue-property-decorator";
       default: [
         {
           index: 1,
-          name: "Exclusive strih",
+          name: "Exclusive barber strih",
           tag: "EXCLUSIVE_CUT",
           price: "10",
           time: "40",
@@ -55,7 +55,7 @@ import { Component, Vue } from "vue-property-decorator";
         },
         {
           index: 2,
-          name: "Rýchly strih",
+          name: "Obyčajný strih",
           tag: "BASIC_CUT",
           price: "7",
           time: "20",
@@ -73,7 +73,7 @@ import { Component, Vue } from "vue-property-decorator";
         },
         {
           index: 4,
-          name: "Rýchly strih + úprava brady",
+          name: "Obyčajný strih + úprava brady",
           tag: "BASIC_BEARD",
           price: "14",
           time: "40",
@@ -84,7 +84,7 @@ import { Component, Vue } from "vue-property-decorator";
 
         {
           index: 5,
-          name: "Exclusive strih + úprava brady",
+          name: "Exclusive barber strih + úprava brady",
           tag: "EXCLUSIVE_BEARD",
           price: "18",
           time: "60",
