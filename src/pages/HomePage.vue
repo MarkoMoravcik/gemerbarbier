@@ -128,7 +128,7 @@
               <h4 class="subheading">
                 Exclusive barber strih &amp; Úprava brady
               </h4>
-              <h5>18 €</h5>
+              <h5>17 €</h5>
               <p>Detailný strih doplnený o úpravu brady.</p>
             </div>
           </div>

@@ -86,7 +86,7 @@ import { Component, Vue } from "vue-property-decorator";
           index: 5,
           name: "Exclusive barber strih + úprava brady",
           tag: "EXCLUSIVE_BEARD",
-          price: "18",
+          price: "17",
           time: "60",
           icon: "$vuetify.icons.exclusiveCut",
           icon2: "$vuetify.icons.beardCut",
