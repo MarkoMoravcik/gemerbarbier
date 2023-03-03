@@ -14,15 +14,15 @@
             v-bind:style="{ width: iconSize, height: iconSize }"
             tabindex="-1"
             :color="cut.color"
-            >{{ cut.icon }}</v-icon
-          >
+            >{{ cut.icon }}
+          </v-icon>
           <v-icon
             v-bind:style="{ width: iconSize, height: iconSize }"
             tabindex="-1"
             :color="cut.color"
             v-if="cutContainsBeard(cut.tag)"
-            >{{ cut.icon2 }}</v-icon
-          >
+            >{{ cut.icon2 }}
+          </v-icon>
         </v-btn>
         <h4 v-bind:style="{ color: cut.color }" :class="`mt-${rs}`">
           {{ cut.name }}
@@ -38,6 +38,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { CutPrices } from "@/constants/cutPrices";
+
 @Component({
   components: {},
   props: {
@@ -48,7 +50,7 @@ import { Component, Vue } from "vue-property-decorator";
           index: 1,
           name: "Exclusive barber strih",
           tag: "EXCLUSIVE_CUT",
-          price: "10",
+          price: CutPrices.EXCLUSIVE_CUT,
           time: "40",
           icon: "$vuetify.icons.exclusiveCut",
           color: "black"
@@ -57,7 +59,7 @@ import { Component, Vue } from "vue-property-decorator";
           index: 2,
           name: "Obyčajný strih",
           tag: "BASIC_CUT",
-          price: "7",
+          price: CutPrices.BASIC_CUT,
           time: "20",
           icon: "$vuetify.icons.classicCut",
           color: "black"
@@ -66,7 +68,7 @@ import { Component, Vue } from "vue-property-decorator";
           index: 3,
           name: "Úprava brady",
           tag: "BEARD",
-          price: "7",
+          price: CutPrices.BEARD,
           time: "20",
           icon: "$vuetify.icons.beardCut",
           color: "black"
@@ -75,7 +77,7 @@ import { Component, Vue } from "vue-property-decorator";
           index: 4,
           name: "Obyčajný strih + úprava brady",
           tag: "BASIC_BEARD",
-          price: "14",
+          price: CutPrices.BASIC_BEARD,
           time: "40",
           icon: "$vuetify.icons.classicCut",
           icon2: "$vuetify.icons.beardCut",
@@ -86,7 +88,7 @@ import { Component, Vue } from "vue-property-decorator";
           index: 5,
           name: "Exclusive barber strih + úprava brady",
           tag: "EXCLUSIVE_BEARD",
-          price: "17",
+          price: CutPrices.EXCLUSIVE_BEARD,
           time: "60",
           icon: "$vuetify.icons.exclusiveCut",
           icon2: "$vuetify.icons.beardCut",
@@ -110,6 +112,7 @@ export default class CutsRadioGroup extends Vue {
   cutContainsBeard(cut: any) {
     return cut.includes("_BEARD");
   }
+
   selectCut(index: any) {
     this.cuts.map(a => (a["color"] = "black"));
     this.cuts[index - 1]["color"] = "#1976d2";
@@ -123,6 +126,7 @@ export default class CutsRadioGroup extends Vue {
 .button_icons::before {
   bottom: auto !important;
 }
+
 :focus {
   outline: 0;
 }

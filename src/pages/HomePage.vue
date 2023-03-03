@@ -2,11 +2,11 @@
   <v-app>
     <v-app-bar app color="#1E283B" height="80px">
       <v-row class="justify-center align-center buttonsPanel">
-        <v-btn text @click="$vuetify.goTo('#startPage')">Domov </v-btn>
-        <v-btn text @click="$vuetify.goTo('#price')">Služby/Cenník </v-btn>
-        <v-btn text @click="$vuetify.goTo('#about-us')">O nás </v-btn>
-        <v-btn text @click="$vuetify.goTo('#gallery')">Galéria </v-btn>
-        <v-btn text @click="$vuetify.goTo('#contact')">Kontakt </v-btn>
+        <v-btn text @click="$vuetify.goTo('#startPage')">Domov</v-btn>
+        <v-btn text @click="$vuetify.goTo('#price')">Služby/Cenník</v-btn>
+        <v-btn text @click="$vuetify.goTo('#about-us')">O nás</v-btn>
+        <v-btn text @click="$vuetify.goTo('#gallery')">Galéria</v-btn>
+        <v-btn text @click="$vuetify.goTo('#contact')">Kontakt</v-btn>
       </v-row>
     </v-app-bar>
     <v-content>
@@ -14,14 +14,14 @@
         <v-img v-if="$vuetify.breakpoint.xs" :src="homeMobileImage">
           <v-container justify-center fluid fill-height class="align-end">
             <v-row
-              class="justify-center buttonsPanel"
-              style="margin-bottom: 80px;"
+                class="justify-center buttonsPanel"
+                style="margin-bottom: 80px;"
             >
               <v-btn
-                v-bind="buttonSize"
-                color="#1E283B"
-                @click="jumptToReservation()"
-                ><b>Rezervácia</b>
+                  v-bind="buttonSize"
+                  color="#1E283B"
+                  @click="jumptToReservation()"
+              ><b>Rezervácia</b>
               </v-btn>
             </v-row>
           </v-container>
@@ -29,14 +29,14 @@
         <v-img v-else :src="homeImage">
           <v-container justify-center fluid fill-height class="align-end">
             <v-row
-              class="justify-center buttonsPanel mb-11"
-              style="margin-bottom: 100px;"
+                class="justify-center buttonsPanel mb-11"
+                style="margin-bottom: 100px;"
             >
               <v-btn
-                v-bind="buttonSize"
-                color="#1E283B"
-                @click="jumptToReservation()"
-                ><b>Rezervácia</b>
+                  v-bind="buttonSize"
+                  color="#1E283B"
+                  @click="jumptToReservation()"
+              ><b>Rezervácia</b>
               </v-btn>
             </v-row>
           </v-container>
@@ -46,17 +46,17 @@
         <v-container class="sectionContainer">
           <div class="service-wrapper">
             <div
-              class="service-info"
-              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+                class="service-info"
+                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fd7c51a22c2c706c36_AOQ_web_1.png"
-                width="60"
-                alt="Number 1"
-                class="service-icon"
+                  :src="cutOneImage"
+                  width="60"
+                  alt="Number 1"
+                  class="service-icon"
               />
               <h4 class="subheading">Úprava brady</h4>
-              <h5>7 €</h5>
+              <h5>{{ beardPrice }} €</h5>
               <p>
                 Pre každého zákazníka, či už s bradou alebo strniskom. Proces
                 začína zarovnaním brady a fúzov, potom prichádza na rad teplý
@@ -66,17 +66,17 @@
               </p>
             </div>
             <div
-              class="service-info"
-              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+                class="service-info"
+                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fda66e814c5a01b85a_AOQ_web_2.png"
-                width="60"
-                alt="Number 2"
-                class="service-icon"
+                  :src="cutTwoImage"
+                  width="60"
+                  alt="Number 2"
+                  class="service-icon"
               />
               <h4 class="subheading">Obyčajný strih</h4>
-              <h5>7 €</h5>
+              <h5>{{ basicCutPrice }} €</h5>
               <p>
                 Pre nenáročných zákazníkov ktorí si nepotrpia na čistú postupku
                 alebo kontúry, skôr pre klasikov ktorí chcú len skrátiť vlasy a
@@ -84,31 +84,31 @@
               </p>
             </div>
             <div
-              class="service-info"
-              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+                class="service-info"
+                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fd7c51a2443f706c37_AOQ_web_3.png"
-                width="60"
-                alt="Number 3"
-                class="service-icon"
+                  :src="cutThreeImage"
+                  width="60"
+                  alt="Number 3"
+                  class="service-icon"
               />
               <h4 class="subheading">Obyčajný strih &amp; Úprava brady</h4>
-              <h5>14 €</h5>
+              <h5>{{ basicBeardPrice }} €</h5>
               <p>Rýchly strih doplnený o úpravu brady.</p>
             </div>
             <div
-              class="service-info"
-              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+                class="service-info"
+                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fd0c377d46b11d355b_AOQ_web_4.png"
-                width="60"
-                alt="Number 4"
-                class="service-icon"
+                  :src="cutFourImage"
+                  width="60"
+                  alt="Number 4"
+                  class="service-icon"
               />
               <h4 class="subheading">Exclusive barber strih</h4>
-              <h5>10 €</h5>
+              <h5>{{ exclusiveCutPrice }} €</h5>
               <p>
                 Detailné strihanie, kde sa vždy snažíme zladiť účes s tvarom
                 hlavy a vašim štýlom, detailná postupka. Samozrejmosťou je aj
@@ -116,19 +116,19 @@
               </p>
             </div>
             <div
-              class="service-info"
-              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+                class="service-info"
+                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                src="https://uploads-ssl.webflow.com/5d13857a4859bb32ead897a3/5d28b0fd0c377d46b11d355b_AOQ_web_4.png"
-                width="60"
-                alt="Number 4"
-                class="service-icon"
+                  :src="cutFiveImage"
+                  width="60"
+                  alt="Number 4"
+                  class="service-icon"
               />
               <h4 class="subheading">
                 Exclusive barber strih &amp; Úprava brady
               </h4>
-              <h5>17 €</h5>
+              <h5>{{ exclusiveBeardPrice }} €</h5>
               <p>Detailný strih doplnený o úpravu brady.</p>
             </div>
           </div>
@@ -147,7 +147,7 @@
       </section>
       <section id="gallery" class="section">
         <v-container class="align-center sectionContainer" fluid>
-          <Gallery />
+          <Gallery/>
         </v-container>
       </section>
       <section id="contact" class="section-with-map">
@@ -162,10 +162,10 @@
 
           <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="16">
             <GmapMarker
-              v-for="(item, index) in markers"
-              :key="index"
-              :position="item.position"
-              @click="center = item.position"
+                v-for="(item, index) in markers"
+                :key="index"
+                :position="item.position"
+                @click="center = item.position"
             />
           </GmapMap>
         </v-div>
@@ -175,13 +175,35 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import Gallery from "@/components/Gallery.vue";
+import {CutPrices} from "@/constants/cutPrices";
+
 declare let require: any;
 
 @Component({
-  components: { Gallery },
+  components: {Gallery},
   props: {
+    cutOneImage: {
+      type: String,
+      default: require("@/assets/images/cutNumbers/1.png")
+    },
+    cutTwoImage: {
+      type: String,
+      default: require("@/assets/images/cutNumbers/2.png")
+    },
+    cutThreeImage: {
+      type: String,
+      default: require("@/assets/images/cutNumbers/3.png")
+    },
+    cutFourImage: {
+      type: String,
+      default: require("@/assets/images/cutNumbers/4.png")
+    },
+    cutFiveImage: {
+      type: String,
+      default: require("@/assets/images/cutNumbers/5.png")
+    },
     homeImage: {
       type: String,
       default: require("@/assets/images/gemerbarbier_homeBackground.jpg")
@@ -212,7 +234,7 @@ declare let require: any;
     },
     center: {
       type: Object,
-      default: () => ({ lat: 48.684073, lng: 20.1217573 })
+      default: () => ({lat: 48.684073, lng: 20.1217573})
     },
     mapTypeId: {
       type: String,
@@ -220,21 +242,41 @@ declare let require: any;
     },
     markers: {
       type: Array,
-      default: () => [{ position: { lat: 48.684073, lng: 20.1217573 } }]
+      default: () => [{position: {lat: 48.684073, lng: 20.1217573}}]
+    },
+    basicCutPrice: {
+      type: String,
+      default: CutPrices.BASIC_CUT
+    },
+    beardPrice: {
+      type: String,
+      default: CutPrices.BEARD
+    },
+    exclusiveCutPrice: {
+      type: String,
+      default: CutPrices.EXCLUSIVE_CUT
+    },
+    basicBeardPrice: {
+      type: String,
+      default: CutPrices.BASIC_BEARD
+    },
+    exclusiveBeardPrice: {
+      type: String,
+      default: CutPrices.EXCLUSIVE_BEARD
     }
   }
 })
 export default class HomePage extends Vue {
   jumptToReservation() {
-    const routeData = this.$router.resolve({ name: "reservation" });
+    const routeData = this.$router.resolve({name: "reservation"});
     window.open(routeData.href, "_blank");
   }
 
   get buttonSize() {
-    const size = { xs: "medium", sm: "medium", lg: "large", xl: "large" }[
-      this.$vuetify.breakpoint.name
-    ];
-    return size ? { [size]: true } : {};
+    const size = {xs: "medium", sm: "medium", lg: "large", xl: "large"}[
+        this.$vuetify.breakpoint.name
+        ];
+    return size ? {[size]: true} : {};
   }
 
   get sectionHeight() {
@@ -321,6 +363,7 @@ export default class HomePage extends Vue {
   display: flex;
   flex-wrap: wrap;
 }
+
 .service-icon {
   height: 60px;
   margin-bottom: 16px;
@@ -339,6 +382,7 @@ export default class HomePage extends Vue {
   justify-content: center;
   background: #1f273a;
 }
+
 .container-2 {
   display: flex;
   width: 100%;
