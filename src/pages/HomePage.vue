@@ -62,7 +62,9 @@
                 začína zarovnaním brady a fúzov, potom prichádza na rad teplý
                 vlhký uterák a zarovnanie s britvou, ďalej nasleduje voda po
                 holeni na uzatvorenie pórov a nakoniec púder pre ukľudnenie
-                pokožky.
+                pokožky. Cena v danom rozmedzí závisí od typu procesu. Pri úprave
+                brady použitím britvy a vlhčeného uteráku je cena vyššia ako len pri
+                použití strojčeku.
               </p>
             </div>
             <div

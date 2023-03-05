@@ -1,7 +1,7 @@
 export const CutPrices = {
   BASIC_CUT: "9",
-  BEARD: "9",
+  BEARD: "7-9",
   EXCLUSIVE_CUT: "12",
-  BASIC_BEARD: "16",
-  EXCLUSIVE_BEARD: "19"
+  BASIC_BEARD: "17",
+  EXCLUSIVE_BEARD: "20"
 };
