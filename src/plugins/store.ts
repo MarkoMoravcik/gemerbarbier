@@ -14,11 +14,11 @@ export default new Vuex.Store({
     barbers: [
       {
         name: "Vilo",
-        photo: require("@/assets/images/vilo.jpg")
+        photo: require("@/assets/images/vilo.jpeg")
       },
       {
         name: "Kubo",
-        photo: require("@/assets/images/emptyAvatar.png")
+        photo: require("@/assets/images/kubo.jpeg")
       }
     ],
     cuts: [

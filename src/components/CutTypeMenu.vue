@@ -1,7 +1,13 @@
 <template>
   <v-container class="justify-center d-flex flex-nowrap">
     <v-row justify="center">
-      <v-col :key="cut.index" lg="5" md="5" v-for="cut in cuts">
+      <v-col
+        style="margin: 9px"
+        :key="cut.index"
+        lg="5"
+        md="5"
+        v-for="cut in cuts"
+      >
         <v-btn
           tabindex="-1"
           :ripple="false"

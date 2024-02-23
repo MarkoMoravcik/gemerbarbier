@@ -29,6 +29,8 @@
                   <v-col v-for="b in barbers" :key="b.id">
                     <v-img
                       :src="b.photo"
+                      height="350px"
+                      width="350px"
                       v-bind:style="{
                         borderStyle: b.borderStyle,
                         borderColor: '#1976D2'
