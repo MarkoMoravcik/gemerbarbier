@@ -4,7 +4,9 @@
       <div class="chat-header">
         <div class="title-section">
           <svg class="chat-icon" viewBox="0 0 24 24" fill="white">
-            <path d="M20 2H4a2 2 0 0 0-2 2v14l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" />
+            <path
+              d="M20 2H4a2 2 0 0 0-2 2v14l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"
+            />
           </svg>
           <span>AI Asistent</span>
         </div>
@@ -12,7 +14,11 @@
       </div>
 
       <div class="messages" ref="messagesContainer">
-        <div v-for="(msg, index) in messages" :key="index" :class="['bubble', msg.sender]">
+        <div
+          v-for="(msg, index) in messages"
+          :key="index"
+          :class="['bubble', msg.sender]"
+        >
           {{ msg.text }}
         </div>
       </div>
@@ -33,33 +39,35 @@
 
     <button v-else class="floating-button" @click="toggleChat">
       <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
-        <path d="M20 2H4a2 2 0 0 0-2 2v14l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" />
+        <path
+          d="M20 2H4a2 2 0 0 0-2 2v14l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"
+        />
       </svg>
     </button>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue from "vue";
 
-import { Component } from 'vue-property-decorator';
-import { Watch } from 'vue-property-decorator';
+import { Component } from "vue-property-decorator";
+import { Watch } from "vue-property-decorator";
 import axios from "axios";
 
 interface Message {
-  sender: 'bot' | 'user';
+  sender: "bot" | "user";
   text: string;
 }
 
 @Component
 export default class ChatbotWidget extends Vue {
   isOpen = false;
-  userInput = '';
+  userInput = "";
   messages: Message[] = [
-    { sender: 'bot', text: "Ahoj! Som tvoj AI asistent. Ako ti môžem pomôcť?" }
+    { sender: "bot", text: "Ahoj! Som tvoj AI asistent. Ako ti môžem pomôcť?" }
   ];
 
-  @Watch('isOpen')
+  @Watch("isOpen")
   onIsOpenChanged(newVal: boolean) {
     if (newVal) {
       this.$nextTick(() => {
@@ -76,8 +84,8 @@ export default class ChatbotWidget extends Vue {
     if (!this.userInput.trim()) return;
 
     const messageText = this.userInput;
-    this.messages.push({ sender: 'user', text: messageText });
-    this.userInput = '';
+    this.messages.push({ sender: "user", text: messageText });
+    this.userInput = "";
 
     this.$nextTick(() => {
       this.scrollToBottom();
@@ -93,14 +101,13 @@ export default class ChatbotWidget extends Vue {
 
       const botReply = response.data.output || "Error.";
 
-      this.messages.push({ sender: 'bot', text: botReply });
+      this.messages.push({ sender: "bot", text: botReply });
 
       this.$nextTick(() => {
         this.scrollToBottom();
       });
     } catch (error) {
-      console.error('Webhook error:', error);
-      this.messages.push({ sender: 'bot', text: 'Oops, nastala chyba!' });
+      this.messages.push({ sender: "bot", text: "Oops, nastala chyba!" });
 
       this.$nextTick(() => {
         this.scrollToBottom();
@@ -123,7 +130,7 @@ export default class ChatbotWidget extends Vue {
   bottom: 24px;
   right: 24px;
   z-index: 9999;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .chat-widget {
@@ -139,7 +146,7 @@ export default class ChatbotWidget extends Vue {
 
 /* Header */
 .chat-header {
-  background-color: #AA251A;
+  background-color: #aa251a;
   color: white;
   padding: 14px 18px;
   display: flex;
@@ -198,7 +205,7 @@ export default class ChatbotWidget extends Vue {
 }
 
 .bubble.user {
-  background-color: #AA251A;
+  background-color: #aa251a;
   color: white;
   align-self: flex-end;
   border-top-right-radius: 4px;
@@ -224,7 +231,7 @@ export default class ChatbotWidget extends Vue {
 
 /* Send Button */
 .send-button {
-  background-color: #AA251A;
+  background-color: #aa251a;
   border: none;
   border-radius: 50%;
   width: 44px;
@@ -237,12 +244,12 @@ export default class ChatbotWidget extends Vue {
 }
 
 .send-button:hover {
-  background-color: #AA251A;
+  background-color: #aa251a;
 }
 
 /* Floating Button */
 .floating-button {
-  background-color: #AA251A;
+  background-color: #aa251a;
   border: none;
   border-radius: 50%;
   width: 56px;

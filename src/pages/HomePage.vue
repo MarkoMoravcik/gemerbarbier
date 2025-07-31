@@ -14,14 +14,14 @@
         <v-img v-if="$vuetify.breakpoint.xs" :src="homeMobileImage">
           <v-container justify-center fluid fill-height class="align-end">
             <v-row
-                class="justify-center buttonsPanel"
-                style="margin-bottom: 80px;"
+              class="justify-center buttonsPanel"
+              style="margin-bottom: 80px;"
             >
               <v-btn
-                  v-bind="buttonSize"
-                  color="#1E283B"
-                  @click="jumptToReservation()"
-              ><b>Rezervácia</b>
+                v-bind="buttonSize"
+                color="#1E283B"
+                @click="jumptToReservation()"
+                ><b>Rezervácia</b>
               </v-btn>
             </v-row>
           </v-container>
@@ -29,14 +29,14 @@
         <v-img v-else :src="homeImage">
           <v-container justify-center fluid fill-height class="align-end">
             <v-row
-                class="justify-center buttonsPanel mb-11"
-                style="margin-bottom: 100px;"
+              class="justify-center buttonsPanel mb-11"
+              style="margin-bottom: 100px;"
             >
               <v-btn
-                  v-bind="buttonSize"
-                  color="#1E283B"
-                  @click="jumptToReservation()"
-              ><b>Rezervácia</b>
+                v-bind="buttonSize"
+                color="#1E283B"
+                @click="jumptToReservation()"
+                ><b>Rezervácia</b>
               </v-btn>
             </v-row>
           </v-container>
@@ -46,14 +46,14 @@
         <v-container class="sectionContainer">
           <div class="service-wrapper">
             <div
-                class="service-info"
-                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                  :src="cutOneImage"
-                  width="60"
-                  alt="Number 1"
-                  class="service-icon"
+                :src="cutOneImage"
+                width="60"
+                alt="Number 1"
+                class="service-icon"
               />
               <h4 class="subheading">Úprava brady</h4>
               <h5>{{ beardPrice }} €</h5>
@@ -62,20 +62,20 @@
                 začína zarovnaním brady a fúzov, potom prichádza na rad teplý
                 vlhký uterák a zarovnanie s britvou, ďalej nasleduje voda po
                 holeni na uzatvorenie pórov a nakoniec púder pre ukľudnenie
-                pokožky. Cena v danom rozmedzí závisí od typu procesu. Pri úprave
-                brady použitím britvy a vlhčeného uteráku je cena vyššia ako len pri
-                použití strojčeku.
+                pokožky. Cena v danom rozmedzí závisí od typu procesu. Pri
+                úprave brady použitím britvy a vlhčeného uteráku je cena vyššia
+                ako len pri použití strojčeku.
               </p>
             </div>
             <div
-                class="service-info"
-                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                  :src="cutTwoImage"
-                  width="60"
-                  alt="Number 2"
-                  class="service-icon"
+                :src="cutTwoImage"
+                width="60"
+                alt="Number 2"
+                class="service-icon"
               />
               <h4 class="subheading">Obyčajný strih</h4>
               <h5>{{ basicCutPrice }} €</h5>
@@ -86,28 +86,28 @@
               </p>
             </div>
             <div
-                class="service-info"
-                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                  :src="cutThreeImage"
-                  width="60"
-                  alt="Number 3"
-                  class="service-icon"
+                :src="cutThreeImage"
+                width="60"
+                alt="Number 3"
+                class="service-icon"
               />
               <h4 class="subheading">Obyčajný strih &amp; Úprava brady</h4>
               <h5>{{ basicBeardPrice }} €</h5>
               <p>Rýchly strih doplnený o úpravu brady.</p>
             </div>
             <div
-                class="service-info"
-                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                  :src="cutFourImage"
-                  width="60"
-                  alt="Number 4"
-                  class="service-icon"
+                :src="cutFourImage"
+                width="60"
+                alt="Number 4"
+                class="service-icon"
               />
               <h4 class="subheading">Exclusive barber strih</h4>
               <h5>{{ exclusiveCutPrice }} €</h5>
@@ -118,14 +118,14 @@
               </p>
             </div>
             <div
-                class="service-info"
-                style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
+              class="service-info"
+              style="opacity: 1; transform: translateX(0px) translateY(0px) translateZ(0px); transition: opacity 600ms ease 0s, transform 900ms ease 0s;"
             >
               <img
-                  :src="cutFiveImage"
-                  width="60"
-                  alt="Number 4"
-                  class="service-icon"
+                :src="cutFiveImage"
+                width="60"
+                alt="Number 4"
+                class="service-icon"
               />
               <h4 class="subheading">
                 Exclusive barber strih &amp; Úprava brady
@@ -149,7 +149,7 @@
       </section>
       <section id="gallery" class="section">
         <v-container class="align-center sectionContainer" fluid>
-          <Gallery/>
+          <Gallery />
         </v-container>
       </section>
       <section id="contact" class="section-with-map">
@@ -164,10 +164,10 @@
 
           <GmapMap :center="center" :map-type-id="mapTypeId" :zoom="16">
             <GmapMarker
-                v-for="(item, index) in markers"
-                :key="index"
-                :position="item.position"
-                @click="center = item.position"
+              v-for="(item, index) in markers"
+              :key="index"
+              :position="item.position"
+              @click="center = item.position"
             />
           </GmapMap>
         </v-div>
@@ -178,15 +178,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import Gallery from "@/components/Gallery.vue";
-import {CutPrices} from "@/constants/cutPrices";
+import { CutPrices } from "@/constants/cutPrices";
 import Chatbot from "@/components/Chatbot.vue";
 
 declare let require: any;
 
 @Component({
-  components: {Chatbot, Gallery},
+  components: { Chatbot, Gallery },
   props: {
     cutOneImage: {
       type: String,
@@ -238,7 +238,7 @@ declare let require: any;
     },
     center: {
       type: Object,
-      default: () => ({lat: 48.684073, lng: 20.1217573})
+      default: () => ({ lat: 48.684073, lng: 20.1217573 })
     },
     mapTypeId: {
       type: String,
@@ -246,7 +246,7 @@ declare let require: any;
     },
     markers: {
       type: Array,
-      default: () => [{position: {lat: 48.684073, lng: 20.1217573}}]
+      default: () => [{ position: { lat: 48.684073, lng: 20.1217573 } }]
     },
     basicCutPrice: {
       type: String,
@@ -272,15 +272,15 @@ declare let require: any;
 })
 export default class HomePage extends Vue {
   jumptToReservation() {
-    const routeData = this.$router.resolve({name: "reservation"});
+    const routeData = this.$router.resolve({ name: "reservation" });
     window.open(routeData.href, "_blank");
   }
 
   get buttonSize() {
-    const size = {xs: "medium", sm: "medium", lg: "large", xl: "large"}[
-        this.$vuetify.breakpoint.name
-        ];
-    return size ? {[size]: true} : {};
+    const size = { xs: "medium", sm: "medium", lg: "large", xl: "large" }[
+      this.$vuetify.breakpoint.name
+    ];
+    return size ? { [size]: true } : {};
   }
 
   get sectionHeight() {
