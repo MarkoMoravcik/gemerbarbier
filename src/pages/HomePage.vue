@@ -172,6 +172,7 @@
           </GmapMap>
         </v-div>
       </section>
+      <Chatbot></Chatbot>
     </v-content>
   </v-app>
 </template>
@@ -180,11 +181,12 @@
 import {Component, Vue} from "vue-property-decorator";
 import Gallery from "@/components/Gallery.vue";
 import {CutPrices} from "@/constants/cutPrices";
+import Chatbot from "@/components/Chatbot.vue";
 
 declare let require: any;
 
 @Component({
-  components: {Gallery},
+  components: {Chatbot, Gallery},
   props: {
     cutOneImage: {
       type: String,
