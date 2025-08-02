@@ -21,6 +21,15 @@
         >
           {{ msg.text }}
         </div>
+
+        <!-- Typing indicator -->
+        <div v-if="typing" class="bubble bot typing">
+          <span class="dot-wrapper">
+            <span class="dot" />
+            <span class="dot" />
+            <span class="dot" />
+          </span>
+        </div>
       </div>
 
       <div class="input-area">
@@ -62,6 +71,7 @@ interface Message {
 @Component
 export default class ChatbotWidget extends Vue {
   isOpen = false;
+  typing = false;
   userInput = "";
   messages: Message[] = [
     { sender: "bot", text: "Ahoj! Som tvoj AI asistent. Ako ti môžem pomôcť?" }
@@ -86,6 +96,7 @@ export default class ChatbotWidget extends Vue {
     const messageText = this.userInput;
     this.messages.push({ sender: "user", text: messageText });
     this.userInput = "";
+    this.typing = true;
 
     this.$nextTick(() => {
       this.scrollToBottom();
@@ -93,13 +104,14 @@ export default class ChatbotWidget extends Vue {
 
     try {
       const response = await axios.post(
-        "https://mychalkosss.app.n8n.cloud/webhook/f9f61e67-0252-4b31-8294-d21cbfc61455",
+        "https://mychalko.app.n8n.cloud/webhook/f9f61e67-0252-4b31-8294-d21cbfc61455",
         {
           message: messageText
         }
       );
 
       const botReply = response.data.output || "Error.";
+      this.typing = false;
 
       this.messages.push({ sender: "bot", text: botReply });
 
@@ -144,7 +156,6 @@ export default class ChatbotWidget extends Vue {
   overflow: hidden;
 }
 
-/* Header */
 .chat-header {
   background-color: #aa251a;
   color: white;
@@ -175,7 +186,6 @@ export default class ChatbotWidget extends Vue {
   cursor: pointer;
 }
 
-/* Messages */
 .messages {
   padding: 16px;
   flex: 1;
@@ -211,7 +221,6 @@ export default class ChatbotWidget extends Vue {
   border-top-right-radius: 4px;
 }
 
-/* Input */
 .input-area {
   display: flex;
   padding: 14px;
@@ -229,7 +238,6 @@ export default class ChatbotWidget extends Vue {
   font-size: 14px;
 }
 
-/* Send Button */
 .send-button {
   background-color: #aa251a;
   border: none;
@@ -247,7 +255,6 @@ export default class ChatbotWidget extends Vue {
   background-color: #aa251a;
 }
 
-/* Floating Button */
 .floating-button {
   background-color: #aa251a;
   border: none;
@@ -264,5 +271,49 @@ export default class ChatbotWidget extends Vue {
 .floating-button svg {
   width: 24px;
   height: 24px;
+}
+
+.bubble.typing {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(196, 197, 199, 0.75);
+  color: #333;
+  border-top-left-radius: 4px;
+  max-width: 60px;
+  padding: 8px 12px;
+}
+
+.dot-wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #555;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
 }
 </style>
